@@ -1,0 +1,16 @@
+#!/bin/bash
+# Thanks to ghostdog74 on SO for the exclude technique
+
+EXCLUDE=".git . .."
+
+for i in ./.[a-zA-Z0-9]*
+do
+    for x in $EXCLUDE
+    do  
+        if [ $x != $i ]
+	then
+            cp -a $i ~/
+        fi  
+    done
+done
+
