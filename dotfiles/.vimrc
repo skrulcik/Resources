@@ -1,16 +1,5 @@
 " Scott Krulcik vimrc
 
-" Pathogen package manager
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
-" vim-airline
-runtime ~/.vim/bundle/vim-airline/autoload/airline.vim
-let g:airline_powerline_fonts = 1
-set laststatus=2
-set ttimeoutlen=50
-let g:airline#extensions#tabline#enabled = 1
-
 " Configure to edit code: syntax colors, line numbers, cursor position
 syntax on
 set number
