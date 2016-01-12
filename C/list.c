@@ -119,6 +119,9 @@ void list_append(list *l, void *elem) {
     new_node->next = NULL;
     l->end->next = new_node;
     l->end = new_node;
+    if (l->length == 0) {
+        l->start = new_node;
+    }
     l->length += 1;
 }
 /* list_prepend
@@ -130,6 +133,9 @@ void list_prepend(list *l, void *elem) {
     node *new_node = node_for_list(l, elem);
     new_node->next = l->start;
     l->start = new_node;
+    if (l->length == 0) {
+        l->end = new_node;
+    }
     l->length += 1;
 }
 /* list_insert
