@@ -65,6 +65,8 @@ then
     exec -l ssh-agent $SHELL -c "bash --login"
 else
   alias ls='ls --color=auto'
+  # Linux shutdown command (works on RasPi, haven't tested on others)
+  alias shutdown="sudo shutdown -h now"
 fi
 
 
