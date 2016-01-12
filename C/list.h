@@ -123,6 +123,6 @@ void *list_nth(list *l, int n);
  *
  * Prints a visual representation of the list to the terminal
  */
-void print_list(list *l);
+void list_print(list *l);
 
 
