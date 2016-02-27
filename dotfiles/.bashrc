@@ -2,7 +2,7 @@
 #
 # Scott Krulcik
 #
-# A lot of this is shamelessly stolen from bashrc_gpi from CMU's Great 
+# A lot of this is shamelessly stolen from bashrc_gpi from CMU's Great
 # Practical Ideas course
 #
 # To use on Mac, put `source ~/.bashrc` in the .bash_profile file
@@ -142,6 +142,17 @@ gpi_makemake() {
     fi
 }
 
+vman() {
+    vim -c "SuperMan $*"
+
+    if [ "$?" != "0" ]; then
+        echo "No manual entry for $*"
+    fi
+}
 
 
+
+
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
