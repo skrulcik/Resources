@@ -2,22 +2,61 @@
 #
 # Scott Krulcik
 #
-# A lot of this is shamelessly stolen from bashrc_gpi from CMU's Great
-# Practical Ideas course
+# Partially derived from CMU's bashrc_gpi and the linux example found in
+# /usr/share/doc/bash/examples/startup-files
 #
 # To use on Mac, put `source ~/.bashrc` in the .bash_profile file
 #
 
-## Prompt style (uncomment 1)
-# Short path, no host:
-PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
-# Short path, with host:
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+      *) return;;
+esac
 
-# Long path, no host:
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-# Long path, with host:
-#PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+# check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# === Appearance ===
+alias grep='grep --color=auto'
+
+# === Prompt ===
+force_color_prompt=yes
+long_promp_path=
+
+if [ -n "$force_color_prompt" ]; then
+    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	color_prompt=yes
+    else
+	color_prompt=
+    fi
+fi
+if [ "$color_prompt" = yes ]; then
+    if [ "$long_promp_path" = yes ]; then
+        # Long path, no host:
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+        # Long path, with host:
+        #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    else
+        # Short path, no host:
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+        # Short path, with host:
+        # PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\W\[\033[00m\]\$ '
+    fi
+else
+    PS1='${debian_chroot:+($debian_chroot)}\u:\W\$ '
+    # If this is an xterm set the title to user@host:dir
+    case "$TERM" in
+    xterm*|rxvt*)
+        PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+            ;;
+        *)
+            ;;
+    esac
+fi
+unset color_prompt force_color_prompt
+
 
 shopt -s checkwinsize         # Update window size after each command
 
@@ -25,9 +64,6 @@ shopt -s checkwinsize         # Update window size after each command
 export HISTCONTROL=ignoreboth # Don't store duplicates
 shopt -s histappend           # Append only to history
 
-#Set up environment variables
-export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-export PATH=/Applications/ShellScripts:$PATH
 #Remove case sensitive completion
 if [ -f /etc/bash_completion ]; then
      . /etc/bash_completion
@@ -47,19 +83,27 @@ logged_cd() {
 alias cd="logged_cd" # Keep track of most recent directory
 
 ## Useful aliases
-alias ls="ls -G"
 alias ccomp='gcc -Wall -Wextra -Werror -std=c99 -pedantic'
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias hidden='ls -a | grep "^\..*"'
 alias linelength='wc -L'
-alias grep='grep --color=auto'
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
 
 ## Mac-specific changes
 if [[ `uname` = "Darwin" || `uname` = "FreeBSD" ]]
 then
+  # Colored ls
   alias ls='ls -G'
+
+  # Scripts directory on my Macbook
+  export PATH=/Applications/ShellScripts:$PATH
+
+  # Homebrew settings
+  export PATH=/usr/local/bin:$PATH
+  export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+  alias vim='/usr/local/bin/vim'
   # Start up ssh-agent
   [[ -z $SSH_AGENT_PID && -z $DISPLAY ]] &&
     exec -l ssh-agent $SHELL -c "bash --login"
@@ -67,6 +111,8 @@ else
   alias ls='ls --color=auto'
   # Linux shutdown command (works on RasPi, haven't tested on others)
   alias shutdown="sudo shutdown -h now"
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
 fi
 
 
@@ -142,6 +188,7 @@ gpi_makemake() {
     fi
 }
 
+# Suggested by jez
 vman() {
     vim -c "SuperMan $*"
 
@@ -150,9 +197,6 @@ vman() {
     fi
 }
 
-
-
-
-
+# Fuzzy find bash history
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
