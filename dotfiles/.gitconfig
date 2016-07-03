@@ -40,23 +40,3 @@
 	added = green
 	changed = yellow
 	untracked = blue
-[alias]
-	# Shorteners
-	a = add
-	c = commit
-
-    # Quick log
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
-    # Verbose log
-	la = log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"
-
-	# Quick status
-	s = status -s
-    # Verbose status
-	sa = status
-
-	# Show the diff between the latest commit and the current state
-	d = !"git diff-index --quiet HEAD -- || clear; git --no-pager diff --patch-with-stat"
-	# `git di $number` shows the diff between the state `$number` revisions ago and the current state
-	di = !"d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d")
-

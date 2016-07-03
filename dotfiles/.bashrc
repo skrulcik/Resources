@@ -87,6 +87,18 @@ alias ccomp='gcc -Wall -Wextra -Werror -std=c99 -pedantic'
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias hidden='ls -a | grep "^\..*"'
 alias linelength='wc -L'
+alias v='vim -p'
+alias ga='git add'
+alias gc='git commit'
+alias gl='git log --pretty=oneline -n 20 --graph --abbrev-commit'
+alias gla='log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"'
+alias gs='git status -s'
+alias gsa='git status'
+alias gd='git diff -p --stat'
+# `gdi $number` shows the diff between the state `$number` revisions ago and the current state
+alias gdi='d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d'
+
+# Makes a directory, then moves into it
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
 
