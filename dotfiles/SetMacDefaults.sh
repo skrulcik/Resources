@@ -537,9 +537,12 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 # Expand the print dialog by default
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 
-for app in "Activity Monitor" "Address Book" "Calendar" "Contacts" "cfprefsd" \
-	"Dock" "Finder" "Google Chrome" "Mail" "Messages" "Photos" "Safari" \
-    "SystemUIServer" "Terminal" "iCal"; do
+# Copy custom dictionary
+cp LocalDictionary ~/Library/Spelling/
+
+for app in "Activity Monitor" "Address Book" "AppleSpell" "Calendar" "Contacts" \
+    "cfprefsd" "Dock" "Finder" "Google Chrome" "Mail" "Messages" "Photos" \
+    "Safari" "SystemUIServer" "Terminal" "iCal"; do
 	killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."
