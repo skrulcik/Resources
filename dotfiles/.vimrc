@@ -119,6 +119,9 @@ set switchbuf=usetab
 nnoremap <c-m> :sbnext<cr>
 nnoremap <c-n> :sbprevious<CR>
 
+" Format the current paragraph
+let @f='{)gq}'
+
 " Make navigating long, wrapped lines behave like normal lines
 noremap <silent> k gk
 noremap <silent> j gj
@@ -155,7 +158,7 @@ augroup mySyntastic
 augroup END
 
 " vim-markdown
-let g:vim_markdown_folding_disabled=0
+let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
 let g:vim_markdown_new_list_item_indent=2
