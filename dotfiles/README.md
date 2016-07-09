@@ -10,7 +10,7 @@ Configuration files and other scripts for setting up a new computer.
 4. Install vim plugins
     1. Run `git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim && vim +PluginInstall +qall`
 5. Install tmux plugins
-    1. Install [TPM](https://github.com/tmux-plugins/tpm).
+    1. Run `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
     2. Set the configuration file: `$ tmux source ~/.tmux.conf`
     3. From within tmux, run `prefix + I` to import the packages.
 6. If on a Mac:
