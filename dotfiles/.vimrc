@@ -108,7 +108,7 @@ let g:mapleader = ","
 " clear hilighting from search
 nmap <leader><space> :noh<cr>
 " Toggle the sidebar for the plugin NERDTree
-nmap <silent> <leader>t :NERDTreeTabsToggle<cr>
+nmap <silent> <leader>t :NERDTreeToggle<cr>
 " Toggle the sidebar for the plugin tagbar
 nmap <silent> <leader>b :TagbarToggle<cr>
 " Toggle files with A.vim
@@ -146,7 +146,6 @@ let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 
 " Nerdtree
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 let g:nerdtree_tabs_open_on_console_startup=0
 
 " Syntastic
@@ -165,8 +164,6 @@ let g:vim_markdown_new_list_item_indent=2
 let g:vim_markdown_toc_autofit = 1
 
 " Tagbar
-" Open/close tagbar with \b
-nmap <silent> <leader>b :TagbarToggle<CR>
 " Reconfigure the tagbar for latex
 let g:tagbar_type_tex = {
 \    'ctagstype' : 'tex',
