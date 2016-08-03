@@ -2,13 +2,12 @@
 
 " Acks:
 " Originally inspired by Jake Zimmerman's vimrc  Jake: github.com/jez
-" Also drew from jfrazelle, bezi
+" Also drew from bezi, jfrazelle, tpope
 
 set nocompatible
 
 " === Package Management ===
 filetype off
-
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -27,15 +26,15 @@ Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
 
 " Code Editing
 Plugin 'scrooloose/syntastic'           " Check for syntax errors
-Plugin 'szw/vim-tags'                   " Generate tag files
-Plugin 'majutsushi/tagbar'              " Display tags
 Plugin 'valloric/youcompleteme'         " Autocomplete
 Plugin 'ntpeters/vim-better-whitespace' " Strip trailing whitespace
 Plugin 'godlygeek/tabular'              " Align CSV files and Markdown tables
 Plugin 'HTML-AutoCloseTag'              " Insert closing HTML tags
 Plugin 'Raimondi/delimitMate'           " Auto closing
 
-
+" Tags
+Plugin 'szw/vim-tags'                   " Generate tag files
+Plugin 'majutsushi/tagbar'              " Display tags
 
 " Syntax
 Plugin 'sudar/vim-arduino-syntax'       " Arduino support
@@ -57,41 +56,61 @@ Plugin 'tmux-plugins/vim-tmux'          " Syntax highlighting for tmux config
 
 " Misc
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'jez/vim-superman'               " Mostly cuz Jake is proud of this
+Plugin 'jez/vim-superman'
+Plugin 'ConradIrwin/vim-bracketed-paste' " Automatically detect pasting
+Plugin 'tpope/vim-dispatch'              " Asynchronous commands
 
 call vundle#end()
+filetype plugin indent on
 
 " === General ===
-set backspace=indent,eol,start
+set backspace=indent,eol,start " 'stronger' backspace
 set encoding=utf-8  " Encode files in UTF-8
-set hlsearch        " Highlight all search terms
-set ignorecase      " Allows case-insensitive file completion
-set incsearch       " Apply search incrementally
-set infercase       " Allows case-insensitive file completion
 set laststatus=2    " Always show file status
 set nobackup        " Fewer annoying files
 set noswapfile      " Fewer annoying files
 set nowritebackup   " Fewer annoying files
 set scrolloff=3     " Keeps a few lines between cursor and edge
-set showcmd         " Show multicharacter commands as they are being typed
-set showmatch       " Shows current search result
 set sidescrolloff=5 " Keeps a few columnns between cursor and edge
-set smartcase       " Disallow case-insensitive if capitals are typed
+set showcmd         " Show multicharacter commands as they are being typed
+set ttyfast         " idk but bezi claims smoother performance
+
+" === Search ===
+set hlsearch        " Highlight all search terms
+set incsearch       " Apply search incrementally
+set showmatch       " Shows current search result
+set noignorecase    " Case sensitive as default
+set smartcase       " Adaptive case sensitivity (only if ignorecase is on)
+
+" === File completion ===
 set splitright      " vsplit to the right
+set fileignorecase  " Ignores case in file completion
 set wildmenu        " Show potential matches above completion,
-set wildmode=full   "   completing the first immediately
+set wildmode=full   " completing the first immediately
+
 " Force write readonly files using sudo
 command! WS w !sudo tee %
-" Replace escape to exit insert mode with jj, props to Bezi
-inoremap jj <ESC>
+" Exit insert mode with kj which is faster than escape
+inoremap kj <ESC>
+" Allow mouse interaction
 if has('mouse')
-    set mouse=a     " Allow mouse interaction
+    set mouse=a
 endif
 
 " === Appearance ===
 syntax on           " Syntax highlighting
 set number          " Line numbers
 set ruler           " Cursor position in file
+" set background=dark " Always keep a dark background
+" set cursorline      " Highlights/underlines current editor line
+" set cursorcolumn    " Highlights/underlines current editor column
+" set cc=81           " Puts barrier line at 80 columns
+" TODO: Pick a universal color scheme
+
+" === Formatting ===
+set wrap
+set textwidth=79
+set formatoptions=qrn1
 
 " === Whitespace ===
 set autoindent
@@ -102,9 +121,17 @@ set shiftwidth=4
 set expandtab
 
 " === Keybindings ===
-let mapleader = "," " Set <leader> to be , instead of \
+" Set leader to Space, with comma as a fallback and as something to display
+let mapleader = ","
 let g:mapleader = ","
+map <space> <leader>
+" Scroll-like navigation
+noremap <silent> J <C-d>
+noremap <silent> K <C-u>
+" Case-insensitive search
+nnoremap ? /\c
 
+" === Commands/Aliases ===
 " clear hilighting from search
 nmap <leader><space> :noh<cr>
 " Toggle the sidebar for the plugin NERDTree
@@ -113,15 +140,17 @@ nmap <silent> <leader>t :NERDTreeToggle<cr>
 nmap <silent> <leader>b :TagbarToggle<cr>
 " Toggle files with A.vim
 nmap <silent> <leader>a :A<cr>
-
-" Switch tabs with ctrl-n and ctrl-m
+" Trim whitespace and save
+nnoremap <silent> <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>
+nnoremap <silent> <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<CR>
+" Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
-nnoremap <c-m> :sbnext<cr>
-nnoremap <c-n> :sbprevious<CR>
-
-" Format the current paragraph
-let @f='{)gq}'
-
+nnoremap <silent> L :tabn<cr>
+nnoremap <silent> H :tabp<cr>
+" Search and replace the word under the cursor
+nnoremap <leader>/ *
+" Format the current paragraph (most useful in markdown)
+nnoremap <leader>f {)gq}
 " Make navigating long, wrapped lines behave like normal lines
 noremap <silent> k gk
 noremap <silent> j gj
@@ -129,10 +158,14 @@ noremap <silent> 0 g0
 noremap <silent> $ g$
 noremap <silent> ^ g^
 noremap <silent> _ g_
-
+" Split and join lines
+nnoremap <leader>J :join<cr>
+nnoremap <leader>j i<cr><esc>k$
 " Center search result on screen
 nmap n nzz
 nmap N Nzz
+" Jump to the end of the line when pasting
+nnoremap Y y$
 
 " === Plugin Settings ===
 
@@ -153,17 +186,24 @@ let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
 augroup mySyntastic
   au!
+  " Turn off syntastic for tex files
   au FileType tex let b:syntastic_mode = "passive"
 augroup END
+
+" Auto-complete (YCM)
+set noinfercase       " Does NOT change the case of letters already typed
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
 let g:vim_markdown_new_list_item_indent=2
-let g:vim_markdown_toc_autofit = 1
+let g:vim_markdown_toc_autofit=1
 
-" Tagbar
+" === Tags ===
+set tagcase=match
+let g:vim_tags_auto_generate=1
+
 " Reconfigure the tagbar for latex
 let g:tagbar_type_tex = {
 \    'ctagstype' : 'tex',
@@ -179,7 +219,7 @@ let g:tagbar_type_tex = {
 
 " git gutter
 hi clear SignColumn
-" Only display "hunks" if the diff is non-zero
+" Only display 'hunks' if the diff is non-zero
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " Better Whitespace
@@ -201,9 +241,6 @@ augroup mydelimitMate
   au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
 augroup END
 
-" vim SuperMan - open up another manpage using 'K'
-noremap K :SuperMan <cword><CR>
-
 " Command Summary
 " \t = View File Tree
 " \b = View Outline
@@ -212,8 +249,6 @@ noremap K :SuperMan <cword><CR>
 " :Tab /<exp> = align on <exp>
 
 " === File Types ===
-filetype plugin indent on " Enable file type detection
-
 augroup myFiletypes
   au!
 
@@ -241,17 +276,6 @@ augroup END
 " === Optional ===
 " Those things that are nice, just not all the time
 
-" set background=dark " Always keep a dark background
-" set cursorline      " Highlights/underlines current editor line
-" set cursorcolumn    " Highlights/underlines current editor column
-" set cc=81           " Puts barrier line at 80 columns
-set ttyfast         " idk but bezi claims smoother performance
-" Trim whitespace on save
-nmap <silent> <leader>w :StripWhitespace<cr> :%s/\n\{3,}/\r\r/e<cr> :w<cr>
-" Long line handling, maybe do it per filetype
-set wrap
-set textwidth=79
-set formatoptions=qrn1
 
 " === Optional (Plugin) ===
 " Uncomment to open tagbar automatically whenever possible
