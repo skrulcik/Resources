@@ -1,0 +1,11 @@
+" Navigation
+map J scrollPageDown
+map K scrollPageUp
+map a goBack
+map s goForward
+map H previousTab
+map L nextTab
+
+" Copying
+unmap yy
+map Y  copyCurrentUrl
