@@ -273,10 +273,6 @@ augroup myFiletypes
 
 augroup END
 
-" === Optional ===
-" Those things that are nice, just not all the time
-
-
 " === Optional (Plugin) ===
 " Uncomment to open tagbar automatically whenever possible
 " autocmd BufEnter * nested :call tagbar#autoopen(0)
