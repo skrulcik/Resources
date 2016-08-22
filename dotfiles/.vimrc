@@ -166,7 +166,7 @@ nnoremap <leader>j i<cr><esc>k$
 nmap n nzz
 nmap N Nzz
 " Jump to the end of the line when pasting
-nnoremap Y y$
+nnoremap P p$
 
 " === Plugin Settings ===
 
