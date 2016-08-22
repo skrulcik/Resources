@@ -50,6 +50,7 @@ Plugin 'plasticboy/vim-markdown'        " Featureful .md support,
                                         "   must be after tabular
 Plugin 'othree/nginx-contrib-vim'       " nginx configu files
 Plugin 'mitsuhiko/vim-python-combined'  " Python 2 and 3 support
+Plugin 'rust-lang/rust.vim'             " Rust
 Plugin 'cakebaker/scss-syntax.vim'      " SCSS
 Plugin 'keith/swift.vim'                " Swift!
 Plugin 'tmux-plugins/vim-tmux'          " Syntax highlighting for tmux config
