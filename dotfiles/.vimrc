@@ -202,7 +202,6 @@ let g:vim_markdown_new_list_item_indent=2
 let g:vim_markdown_toc_autofit=1
 
 " === Tags ===
-set tagcase=match
 let g:vim_tags_auto_generate=1
 
 " Reconfigure the tagbar for latex
