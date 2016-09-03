@@ -14,7 +14,9 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 
 " Appearance
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Bundle 'edkolev/tmuxline.vim'
 
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
@@ -176,8 +178,11 @@ let g:netrw_dirhistmax = 0   " Don't create .netrwhist files
 
 " Airline
 let g:airline_detect_paste=1
-let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
+let g:airline_theme='papercolor'
+let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tmuxline#enabled = 1
+let g:airline#extensions#hunks#non_zero_only = 1
 
 " Nerdtree
 let g:nerdtree_tabs_open_on_console_startup=0
@@ -219,8 +224,6 @@ let g:tagbar_type_tex = {
 
 " git gutter
 hi clear SignColumn
-" Only display 'hunks' if the diff is non-zero
-let g:airline#extensions#hunks#non_zero_only = 1
 
 " Better Whitespace
 " Don't highlight whitespace in git commit messages (for diffs)...
