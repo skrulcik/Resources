@@ -1,0 +1,10 @@
+az: http://smile.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=%s Amazon
+d: http://www.dictionary.com/browse/%s Dictionary
+drive: https://drive.google.com/#search/%s Google Drive
+fb: https://www.facebook.com/search/top/?q=%s&opensearch=1 Facebook
+maps: https://www.google.com/maps/search/%s?hl=en&source=opensearch Google Maps
+ghub: https://github.com/search?q=%s&ref=opensearch github
+so: http://stackoverflow.com/search?q=%s Stack Overflow
+t: http://thesaurus.reference.com/browse/%s Thesaurus
+w: http://www.wikipedia.org/w/index.php?title=Special:Search&search=%s Wikipedia
+wa: http://www.wolframalpha.com/input/?i=%s Wolfram Alpha
