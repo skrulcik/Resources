@@ -209,6 +209,17 @@ vman() {
     fi
 }
 
+# Open a tmux session if it doesn't exist, named after a similar script for
+# CITC clients I used at Google
+gmux() {
+    if [ -z "$1" ]
+    then
+        echo 'Usage: gmux <session name>'
+    else
+        tmux attach-session -dt $1 || tmux new -s $1
+    fi
+}
+
 # Fuzzy find bash history
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
