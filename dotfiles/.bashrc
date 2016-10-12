@@ -88,15 +88,21 @@ alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias hidden='ls -a | grep "^\..*"'
 alias linelength='wc -L'
 alias v='vim -p'
+
+# Git Aliases
 alias ga='git add'
 alias gc='git commit'
-alias gl='git log --pretty=oneline -n 20 --graph --abbrev-commit'
-alias gla='log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n"'
+alias gl='git log --graph --color --pretty=oneline -n 20 --abbrev-commit'
+alias gla='git log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n" --stat'
 alias gs='git status -s'
 alias gsa='git status'
-alias gd='git diff -p --stat'
+alias gd='git diff'
+alias gdc='git diff --cached'
+alias gpr='git pull --rebase'
 # `gdi $number` shows the diff between the state `$number` revisions ago and the current state
 alias gdi='d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d'
+alias grbc='git rebase --continue'
+grbi() { git rebase -i HEAD~$1; }
 
 # Makes a directory, then moves into it
 mkcd() { mkdir -p "$@" && cd "$_"; }
@@ -142,7 +148,7 @@ gpi_makemake() {
 		echo -e "You don't have any of the supported file types in this directory"
 		return
 	fi
-	
+
 
     if [ "$ext" == "tex" ]; then
         echo -e "gpi_makemake is making you a LaTeX Makefile!"
