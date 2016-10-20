@@ -134,6 +134,7 @@ else
 fi
 
 
+RESOURCE_PATH='~/Resources'
 gpi_makemake() {
     supported_extensions='tex java c c0'
 	found=0
@@ -163,7 +164,7 @@ gpi_makemake() {
         if [ "$file" == "" ]; then
             echo -e "Aborting..."
         else
-            cat ${GPI_PATH}/makefiles/latex.mk |
+            cat ${RESOURCE_PATH}/gpi_makefiles/latex.mk |
                 sed -e "s/GPIMAKEMAKE/${file%.tex}/" > Makefile
             echo "gpi_makemake has installed a LaTeX Makefile for $file"
             echo "${c_green}make${c_reset} -- Compiles the LaTeX document into a PDF"
@@ -179,7 +180,7 @@ gpi_makemake() {
         echo -n "What should the name of the target executable be? "
         read target
 
-        cat ${GPI_PATH}/makefiles/c.mk |
+        cat ${RESOURCE_PATH}/gpi_makefiles/c.mk |
             sed -e "s/GPIMAKEMAKE_TARGET/${target}/" > Makefile
         echo "gpi_makemake has installed a C Makefile!"
         echo "${c_green}make${c_reset} -- Compiles the C Program (no debug information)"
@@ -193,7 +194,7 @@ gpi_makemake() {
         read sources
         echo -n "What should the name of the target executable be? "
         read target
- cat ${GPI_PATH}/makefiles/c0.mk |
+        cat ${RESOURCE_PATH}/gpi_makefiles/c0.mk |
             sed -e "s/GPIMAKEMAKE_TARGET/${target}/" |
             sed -e "s/GPIMAKEMAKE_SOURCE/${sources}/" > Makefile
         echo "gpi_makemake has installed a C0 Makefile"
