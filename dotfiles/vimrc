@@ -3,6 +3,8 @@
 " Acks:
 " Originally inspired by Jake Zimmerman's vimrc  Jake: github.com/jez
 " Also drew from bezi, jfrazelle, tpope
+" Color scheme based on the iTerm Neutron theme, ported to vim by Joseph
+" Wecker
 
 set nocompatible
 
@@ -101,6 +103,7 @@ if has('mouse')
 endif
 
 " === Appearance ===
+colorscheme krulcikcolor
 syntax on           " Syntax highlighting
 set number          " Line numbers
 set ruler           " Cursor position in file
@@ -108,7 +111,6 @@ set ruler           " Cursor position in file
 " set cursorline      " Highlights/underlines current editor line
 " set cursorcolumn    " Highlights/underlines current editor column
 " set cc=81           " Puts barrier line at 80 columns
-" TODO: Pick a universal color scheme
 
 " === Formatting ===
 set wrap
@@ -131,6 +133,8 @@ map <space> <leader>
 " Scroll-like navigation
 noremap <silent> J <C-d>
 noremap <silent> K <C-u>
+noremap <silent> B 10b
+noremap <silent> W 10w
 " Case-insensitive search
 nnoremap ? /\c
 
@@ -179,7 +183,7 @@ let g:netrw_dirhistmax = 0   " Don't create .netrwhist files
 " Airline
 let g:airline_detect_paste=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='papercolor'
+let g:airline_theme='murmur'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
