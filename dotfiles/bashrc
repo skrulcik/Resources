@@ -107,15 +107,14 @@ grbi() { git rebase -i HEAD~$1; }
 # Makes a directory, then moves into it
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
+# Export resource path to a global variable
+export RESOURCE_PATH=`cat ~/.krulcik_resource_path`
 
 ## Mac-specific changes
 if [[ `uname` = "Darwin" || `uname` = "FreeBSD" ]]
 then
   # Colored ls
   alias ls='ls -G'
-
-  # Scripts directory on my Macbook
-  export PATH=/Applications/ShellScripts:$PATH
 
   # Homebrew settings
   export PATH=/usr/local/bin:$PATH
@@ -133,8 +132,6 @@ else
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
-
-RESOURCE_PATH='~/Resources'
 gpi_makemake() {
     supported_extensions='tex java c c0'
 	found=0

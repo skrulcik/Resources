@@ -1,6 +1,11 @@
 #!/bin/bash
+#
+# Creates symbolic links between dotfiles and their counterparts in this
+# resources directory
 
-THIS_FOLDER=$(pwd)
+# Get directory code from:
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
+THIS_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 DOTFILES=(vimrc bashrc gitconfig tmux.conf)
 
 # First copy standard dotfiles
@@ -37,4 +42,3 @@ then
 else
     echo 'Vundle already installed.'
 fi
-
