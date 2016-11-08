@@ -26,19 +26,18 @@ Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
 Plugin 'ctrlpvim/ctrlp.vim'             " Find files
 Plugin 'vim-scripts/a.vim'              " Open alternates
 Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
-"Plugin 'tpope/vim-fugitive'             " Use git commands without leaving vim
 
 " Code Editing
 Plugin 'scrooloose/syntastic'           " Check for syntax errors
 Plugin 'valloric/youcompleteme'         " Autocomplete
 Plugin 'ntpeters/vim-better-whitespace' " Strip trailing whitespace
 Plugin 'godlygeek/tabular'              " Align CSV files and Markdown tables
-Plugin 'HTML-AutoCloseTag'              " Insert closing HTML tags
 Plugin 'Raimondi/delimitMate'           " Auto closing
+Plugin 'tpope/vim-commentary'           " Comment/Uncomment blocks
 
 " Tags
 Plugin 'szw/vim-tags'                   " Generate tag files
-Plugin 'majutsushi/tagbar'              " Display tags
+Plugin 'majutsushi/tagbar'              " Display tags in vertical split
 
 " Syntax
 Plugin 'sudar/vim-arduino-syntax'       " Arduino support
