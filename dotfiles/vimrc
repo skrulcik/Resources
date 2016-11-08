@@ -154,6 +154,8 @@ nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<
 nnoremap <leader>Q :qall!<CR>
 " Write file, then make
 nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Make<CR>
+" Recursive grep search, I find myself doing this a lot
+nnoremap <leader>g :!grep -r<space>
 " Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
