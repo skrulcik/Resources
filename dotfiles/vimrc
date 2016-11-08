@@ -22,7 +22,7 @@ Bundle 'edkolev/tmuxline.vim'
 
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
-"Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
+Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
 Plugin 'ctrlpvim/ctrlp.vim'             " Find files
 Plugin 'vim-scripts/a.vim'              " Open alternates
 Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
@@ -142,7 +142,7 @@ nnoremap ? /\c
 " clear hilighting from search
 nmap <leader><space> :noh<cr>
 " Toggle the sidebar for the plugin NERDTree
-nmap <silent> <leader>t :NERDTreeToggle<cr>
+nmap <silent> <leader>t :NERDTreeTabsToggle<cr>
 " Toggle the sidebar for the plugin tagbar
 nmap <silent> <leader>b :TagbarToggle<cr>
 " Toggle files with A.vim
@@ -150,6 +150,8 @@ nmap <silent> <leader>a :A<cr>
 " Trim whitespace and save
 nnoremap <silent> <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>
 nnoremap <silent> <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<CR>
+" Force quit
+nnoremap <silent> <leader>Q :qall!<CR>
 " Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
@@ -189,11 +191,12 @@ let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " Nerdtree
-let g:nerdtree_tabs_open_on_console_startup=0
+let g:nerdtree_tabs_open_on_console_startup=2
 
 " Syntastic
 let g:syntastic_error_symbol = '✘'
 let g:syntastic_warning_symbol = "▲"
+let g:syntastic_java_checkers=['']
 augroup mySyntastic
   au!
   " Turn off syntastic for tex files
