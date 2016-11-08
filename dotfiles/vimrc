@@ -148,10 +148,12 @@ nmap <silent> <leader>b :TagbarToggle<cr>
 " Toggle files with A.vim
 nmap <silent> <leader>a :A<cr>
 " Trim whitespace and save
-nnoremap <silent> <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>
-nnoremap <silent> <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<CR>
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>
+nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<CR>
 " Force quit
-nnoremap <silent> <leader>Q :qall!<CR>
+nnoremap <leader>Q :qall!<CR>
+" Write file, then make
+nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Make<CR>
 " Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
@@ -191,6 +193,7 @@ let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 
 " Nerdtree
+" Open tab pane when a directory is the first argument to vim
 let g:nerdtree_tabs_open_on_console_startup=2
 
 " Syntastic
@@ -215,6 +218,12 @@ let g:vim_markdown_toc_autofit=1
 
 " === Tags ===
 let g:vim_tags_auto_generate=1
+let g:vim_tags_use_vim_dispatch=1
+" Open tag in vertical window
+nmap <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+" Open tag in new tab
+nmap <leader>[ :tabe <CR>:exec("tag ".expand("<cword>"))<CR>
+
 
 " Reconfigure the tagbar for latex
 let g:tagbar_type_tex = {
