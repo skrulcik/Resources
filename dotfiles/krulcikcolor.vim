@@ -20,14 +20,14 @@ let colors_name = "krulcikcolor"
 " LGray  |  251  | #C6C6C6 |
 " MGray  |  243  | #767676 |
 " DGray  |  236  | #303030 |
-" Black  |  233  | #121212 |
+" Black  |    0  | #000000 |
 
 " white on black
-hi Normal       guifg=#FFFFFF guibg=#121212                     ctermfg=15 ctermbg=233
-hi Directory    guifg=#FFFFFF guibg=#121212                     ctermfg=15 ctermbg=233
+hi Normal       guifg=#FFFFFF guibg=#000000                     ctermfg=15 ctermbg=0
+hi Directory    guifg=#FFFFFF guibg=#000000                     ctermfg=15 ctermbg=0
 hi Underlined   cterm=underline term=underline
 " black on light gray
-hi Visual       guifg=#121212 guibg=#C6C6C6 gui=reverse,underline    ctermfg=233 ctermbg=251 cterm=reverse,underline
+hi Visual       guifg=#000000 guibg=#C6C6C6 gui=reverse,underline    ctermfg=0 ctermbg=251 cterm=reverse,underline
 
 " white on orange
 hi ErrorMsg     guifg=#FFFFFF guibg=#FF8C00                     ctermfg=15 ctermbg=166 term=bold
@@ -44,7 +44,7 @@ hi IncSearch    guifg=#767676 guibg=#5F87FF                     ctermfg=243 cter
 " medium gray on black
 hi Comment guifg=#767676 ctermfg=243 cterm=none
 hi SpecialComment   guifg=#767676 ctermfg=243 cterm=underline term=underline
-hi CursorLine guibg=#121212 ctermbg=236 cterm=underline term=underline
+hi CursorLine guibg=#000000 ctermbg=236 cterm=underline term=underline
 " green on black
 hi Constant     guifg=#87AF5F ctermfg=70 cterm=none
 hi Identifier   guifg=#87AF5F ctermfg=70 cterm=none
@@ -70,7 +70,7 @@ hi PmenuSel     guifg=#C6C6C6 guibg=#FF8C00 ctermfg=251 ctermbg=166
 hi PmenuSbar    guifg=#C6C6C6 guibg=#FF8C00 ctermfg=251 ctermbg=166
 hi PmenuThumb   guifg=#C6C6C6 ctermfg=251
 " white on black
-hi WildMenu     guifg=#FFFFFF guibg=#121212 ctermfg=15 ctermbg=233
+hi WildMenu     guifg=#FFFFFF guibg=#000000 ctermfg=15 ctermbg=0
 
 " Green background
 hi DiffChange   guibg=#87AF5F ctermbg=70
