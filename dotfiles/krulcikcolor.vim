@@ -18,7 +18,7 @@ let colors_name = "krulcikcolor"
 " Orange |  166  | #FF8C00 |
 " White  |   15  | #FFFFFF |
 " LGray  |  251  | #C6C6C6 |
-" MGray  |  237  | #3A3A3A |
+" MGray  |  243  | #767676 |
 " DGray  |  236  | #303030 |
 " Black  |  233  | #121212 |
 
@@ -39,11 +39,11 @@ hi MoreMsg      guifg=#87AF5F ctermfg=70
 hi Todo         guifg=#FFFFFF guibg=#87AF5F                     ctermfg=15 ctermbg=70
 " white on blue
 hi Search       guifg=#FFFFFF guibg=#5F87FF                     ctermfg=15 ctermbg=27 cterm=underline term=underline
-hi IncSearch    guifg=#3A3A3A guibg=#5F87FF                     ctermfg=237 ctermbg=27
+hi IncSearch    guifg=#767676 guibg=#5F87FF                     ctermfg=243 ctermbg=27
 
 " medium gray on black
-hi Comment guifg=#3A3A3A ctermfg=237 cterm=none
-hi SpecialComment   guifg=#3A3A3A ctermfg=237 cterm=underline term=underline
+hi Comment guifg=#767676 ctermfg=243 cterm=none
+hi SpecialComment   guifg=#767676 ctermfg=243 cterm=underline term=underline
 hi CursorLine guibg=#121212 ctermbg=236 cterm=underline term=underline
 " green on black
 hi Constant     guifg=#87AF5F ctermfg=70 cterm=none
@@ -58,7 +58,7 @@ hi Title        guifg=#5F87FF ctermfg=27 cterm=none
 hi NonText      guifg=#5F87FF ctermfg=27 cterm=none
 
 " medium gray on dark gray
-hi LineNr       guifg=#3A3A3A guibg=#303030 ctermfg=237 ctermbg=236
+hi LineNr       guifg=#767676 guibg=#303030 ctermfg=243 ctermbg=236
 " dark gray on light
 hi VertSplit    guifg=#303030 guibg=#C6C6C6 ctermfg=236 ctermbg=251
 
