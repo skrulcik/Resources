@@ -27,9 +27,9 @@ long_promp_path=
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
+    color_prompt=yes
     else
-	color_prompt=
+    color_prompt=
     fi
 fi
 if [ "$color_prompt" = yes ]; then
@@ -134,18 +134,18 @@ fi
 
 gpi_makemake() {
     supported_extensions='tex java c c0'
-	found=0
+    found=0
     for ext in $supported_extensions; do
         files=$(ls *.$ext 2> /dev/null | wc -l)
         if [ "$files" != "0" ]; then
-			found=1
+            found=1
             break
         fi
     done
-	if [ "$found" == "0" ]; then
-		echo -e "You don't have any of the supported file types in this directory"
-		return
-	fi
+    if [ "$found" == "0" ]; then
+        echo -e "You don't have any of the supported file types in this directory"
+        return
+    fi
 
 
     if [ "$ext" == "tex" ]; then
