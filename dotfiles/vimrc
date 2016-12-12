@@ -223,8 +223,15 @@ let g:vim_tags_use_vim_dispatch=1
 " Open tag in vertical window
 nmap <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
 " Open tag in new tab
-nmap <leader>[ :tabe <CR>:exec("tag ".expand("<cword>"))<CR>
-
+nmap <leader>} :tabe <CR>:exec("tag ".expand("<cword>"))<CR>
+" Find callers with cscope - http://stackoverflow.com/q/19469770
+function! Csc()
+  " Find callers of the function under the cursor
+  cscope find c <cword>
+  copen
+endfunction
+command! Csc call Csc()
+nmap <leader>[ :Csc<CR>
 
 " Reconfigure the tagbar for latex
 let g:tagbar_type_tex = {
