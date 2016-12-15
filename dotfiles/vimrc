@@ -214,7 +214,7 @@ set noinfercase       " Does NOT change the case of letters already typed
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
-let g:vim_markdown_new_list_item_indent=2
+let g:vim_markdown_new_list_item_indent=0
 let g:vim_markdown_toc_autofit=1
 
 " === Tags ===
@@ -255,9 +255,6 @@ let g:better_whitespace_filetypes_blacklist=['gitcommit']
 " ... but strip it on save so that we're still safe
 autocmd FileType gitcommit autocmd BufWritePre <buffer> StripWhitespace
 
-" Tabularize
-:abbrev Table Tabularize
-
 " delimitMate - Autocloseable tags
 let delimitMate_expand_cr = 1
 augroup mydelimitMate
@@ -293,6 +290,9 @@ augroup myFiletypes
   " Turn on spell checking and 80-char lines by default for these filetypes
   au FileType pandoc,markdown,tex setlocal spell
   au FileType pandoc,markdown,tex setlocal tw=80
+
+  " Use table of contents instead of tagbar for markdown
+  au FileType markdown map <buffer> <silent> <leader>b :Toc<cr>
 
   " Always use tabs
   au FileType gitconfig setlocal noexpandtab
