@@ -60,27 +60,37 @@ unset color_prompt force_color_prompt
 
 shopt -s checkwinsize         # Update window size after each command
 
-## History configuration
+# History configuration
 export HISTCONTROL=ignoreboth # Don't store duplicates
 shopt -s histappend           # Append only to history
 
-#Remove case sensitive completion
+# Remove case sensitive completion
 if [ -f /etc/bash_completion ]; then
      . /etc/bash_completion
 fi
 bind "set completion-ignore-case on"
 
-
-## Open shell to last cd
-if [ -e ~/.last_cd ]
+## Mac-specific changes
+if [[ `uname` = "Darwin" || `uname` = "FreeBSD" ]]
 then
-    cd "$(cat ~/.last_cd)"
+  # Colored ls
+  alias ls='ls -G'
+
+  # Homebrew settings
+  export PATH=/usr/local/bin:$PATH
+  export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
+
+  alias vim='/usr/local/bin/vim'
+  # Start up ssh-agent
+  [[ -z $SSH_AGENT_PID && -z $DISPLAY ]] &&
+    exec -l ssh-agent $SHELL -c "bash --login"
+else
+  alias ls='ls --color=auto'
+  # Linux shutdown command (works on RasPi, haven't tested on others)
+  alias shutdown="sudo shutdown -h now"
+  alias pbcopy='xclip -selection clipboard'
+  alias pbpaste='xclip -selection clipboard -o'
 fi
-logged_cd() {
-    cd "$@"
-    pwd > ~/.last_cd
-}
-alias cd="logged_cd" # Keep track of most recent directory
 
 ## Useful aliases
 alias ccomp='gcc -Wall -Wextra -Werror -std=c99 -pedantic'
@@ -107,30 +117,23 @@ grbi() { git rebase -i HEAD~$1; }
 # Makes a directory, then moves into it
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
+# Open shell to last cd
+if [ -e ~/.last_cd ]; then cd "$(cat ~/.last_cd)"; fi
+logged_cd_ls() {
+    cd "$@"
+    pwd > ~/.last_cd
+    # If we change to anything but the home directory, ls immediately
+    if [ "$?" = "0" -a "$#" != "0" ];
+    then
+        ls ./
+    fi
+}
+alias cd="logged_cd_ls" # Keep track of most recent directory
+
 # Export resource path to a global variable
 export RESOURCE_PATH=`cat ~/.krulcik_resource_path`
-
-## Mac-specific changes
-if [[ `uname` = "Darwin" || `uname` = "FreeBSD" ]]
-then
-  # Colored ls
-  alias ls='ls -G'
-
-  # Homebrew settings
-  export PATH=/usr/local/bin:$PATH
-  export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
-
-  alias vim='/usr/local/bin/vim'
-  # Start up ssh-agent
-  [[ -z $SSH_AGENT_PID && -z $DISPLAY ]] &&
-    exec -l ssh-agent $SHELL -c "bash --login"
-else
-  alias ls='ls --color=auto'
-  # Linux shutdown command (works on RasPi, haven't tested on others)
-  alias shutdown="sudo shutdown -h now"
-  alias pbcopy='xclip -selection clipboard'
-  alias pbpaste='xclip -selection clipboard -o'
-fi
+# Add resource bin to path
+export PATH=$RESOURCE_PATH/bin:$PATH
 
 gpi_makemake() {
     supported_extensions='tex java c c0'
