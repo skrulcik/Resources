@@ -18,7 +18,6 @@ Plugin 'gmarik/Vundle.vim'
 " Appearance
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Bundle 'edkolev/tmuxline.vim'
 
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
@@ -190,8 +189,11 @@ let g:airline_detect_paste=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='murmur'
 let g:airline#extensions#tabline#enabled=1
-let g:airline#extensions#tmuxline#enabled = 1
 let g:airline#extensions#hunks#non_zero_only = 1
+
+" TMUX
+" If the current buffer has unsaved changes, save it before navigating away
+let g:tmux_navigator_save_on_switch = 1
 
 " Nerdtree
 " Open tab pane when a directory is the first argument to vim
