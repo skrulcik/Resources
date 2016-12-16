@@ -1,0 +1,9 @@
+#!/bin/bash
+# Get the extensionless basename of a file WITH its path
+
+if [ "$#" = 1 ];
+then
+    echo "$1" | sed -e 's/\.[^.]*$//';
+else
+    echo "usage: basepath filename";
+fi
