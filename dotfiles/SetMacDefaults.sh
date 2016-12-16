@@ -97,7 +97,8 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 
 # Set a blazingly fast keyboard repeat rate
-defaults write NSGlobalDomain KeyRepeat -int 0
+# This was too fast, I am unsure how to find a balance
+# defaults write NSGlobalDomain KeyRepeat -int 1
 
 # Set language and text formats
 defaults write NSGlobalDomain AppleLanguages -array "en" "nl"
@@ -453,7 +454,7 @@ defaults write com.apple.messageshelper.MessageController SOInputLineSettings -d
 defaults write com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true
 
 # Copy custom dictionary
-cp LocalDictionary ~/Library/Spelling/
+cp $RESOURCE_PATH/dotfiles/LocalDictionary ~/Library/Spelling/
 
 for app in "Activity Monitor" "Address Book" "AppleSpell" "Calendar" "Contacts" \
     "cfprefsd" "Dock" "Finder" "Google Chrome" "Mail" "Messages" "Photos" \
