@@ -43,8 +43,8 @@ hi IncSearch    guifg=#767676 guibg=#5F87FF                     ctermfg=243 cter
 
 " medium gray on black
 hi Comment guifg=#767676 ctermfg=243 cterm=none
-hi SpecialComment   guifg=#767676 ctermfg=243 cterm=underline term=underline
-hi CursorLine guibg=#000000 ctermbg=236 cterm=underline term=underline
+hi SpecialComment   guifg=#767676 ctermfg=243 gui=underline cterm=underline term=underline
+hi CursorLine guibg=#000000 ctermbg=236 gui=underline cterm=underline term=underline
 " green on black
 hi Constant     guifg=#87AF5F ctermfg=70 cterm=none
 hi Identifier   guifg=#87AF5F ctermfg=70 cterm=none
@@ -80,4 +80,9 @@ hi DiffChange   guibg=#FF8C00 ctermbg=166
 hi DiffText     guifg=#FF8C00 ctermfg=166 gui=underline term=underline
 " Red background
 hi DiffDelete   guibg=#800000 ctermbg=1
+
+" Spellcheck
+" Underline and make medium gray
+hi clear SpellBad
+hi SpellBad     guisp=#FF8C00 gui=undercurl ctermfg=243 cterm=undercurl term=undercurl
 
