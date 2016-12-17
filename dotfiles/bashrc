@@ -121,10 +121,10 @@ mkcd() { mkdir -p "$@" && cd "$_"; }
 if [ -e ~/.last_cd ]; then cd "$(cat ~/.last_cd)"; fi
 logged_cd_ls() {
     cd "$@"
-    pwd > ~/.last_cd
     # If we change to anything but the home directory, ls immediately
     if [ "$?" = "0" -a "$#" != "0" ];
     then
+        pwd > ~/.last_cd
         ls ./
     fi
 }
