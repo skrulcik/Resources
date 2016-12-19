@@ -153,7 +153,7 @@ nnoremap <leader>Q :qall!<CR>
 " Write file, then make
 nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Make<CR>
 " Recursive grep search, I find myself doing this a lot
-nnoremap <leader>g :!grep -r<space>
+nnoremap <leader>g :!grep -rn<space>
 " Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
@@ -216,7 +216,7 @@ set noinfercase       " Does NOT change the case of letters already typed
 let g:vim_markdown_folding_disabled=1
 let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
-let g:vim_markdown_new_list_item_indent=0
+let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
 
 " === Tags ===
