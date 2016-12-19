@@ -6,7 +6,7 @@
 # Get directory code from:
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 THIS_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DOTFILES=(vimrc bashrc gitconfig tmux.conf)
+DOTFILES=(vimrc bashrc gitconfig tmux.conf ycm_extra_conf.py)
 
 # First copy standard dotfiles
 for i in ${DOTFILES[@]};
