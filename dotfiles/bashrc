@@ -81,6 +81,7 @@ then
   export PYTHONPATH=/usr/local/lib/python2.7/site-packages:$PYTHONPATH
 
   alias vim='/usr/local/bin/vim'
+  export EDITOR='/usr/local/bin/vim'
   # Start up ssh-agent
   [[ -z $SSH_AGENT_PID && -z $DISPLAY ]] &&
     exec -l ssh-agent $SHELL -c "bash --login"
