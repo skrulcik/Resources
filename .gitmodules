@@ -1,0 +1,3 @@
+[submodule "bin/go-navigator"]
+	path = bin/go-navigator
+	url = git@github.com:skrulcik/go-navigator

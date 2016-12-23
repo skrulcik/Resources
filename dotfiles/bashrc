@@ -118,23 +118,13 @@ grbi() { git rebase -i HEAD~$1; }
 # Makes a directory, then moves into it
 mkcd() { mkdir -p "$@" && cd "$_"; }
 
-# Open shell to last cd
-if [ -e ~/.last_cd ]; then cd "$(cat ~/.last_cd)"; fi
-logged_cd_ls() {
-    cd "$@"
-    # If we change to anything but the home directory, ls immediately
-    if [ "$?" = "0" -a "$#" != "0" ];
-    then
-        pwd > ~/.last_cd
-        ls ./
-    fi
-}
-alias cd="logged_cd_ls" # Keep track of most recent directory
-
 # Export resource path to a global variable
 export RESOURCE_PATH=`cat ~/.krulcik_resource_path`
 # Add resource bin to path
 export PATH=$RESOURCE_PATH/bin:$PATH
+
+# Use the "go" function instead of cd https://github.com/skrulcik/go-navigator
+. $RESOURCE_PATH/bin/go-navigator/go
 
 gpi_makemake() {
     supported_extensions='tex java c c0'
