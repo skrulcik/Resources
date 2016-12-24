@@ -121,7 +121,12 @@ mkcd() { mkdir -p "$@" && cd "$_"; }
 # Export resource path to a global variable
 export RESOURCE_PATH=`cat ~/.krulcik_resource_path`
 # Add resource bin to path
-export PATH=$RESOURCE_PATH/bin:$PATH
+export PATH="$RESOURCE_PATH/bin:$PATH"
+if [ -d $HOME/.cargo ];
+then
+  # Rust bin
+  export PATH="$HOME/.cargo/bin:$PATH"
+fi
 
 # Use the "go" function instead of cd https://github.com/skrulcik/go-navigator
 . $RESOURCE_PATH/bin/go-navigator/go
