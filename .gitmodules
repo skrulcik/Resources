@@ -1,3 +1,6 @@
 [submodule "bin/go-navigator"]
 	path = bin/go-navigator
 	url = git@github.com:skrulcik/go-navigator
+[submodule "Rust/src_copy"]
+	path = Rust/src_copy
+	url = git@github.com:rust-lang/rust

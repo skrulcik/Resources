@@ -211,6 +211,8 @@ augroup END
 
 " Auto-complete (YCM)
 set noinfercase       " Does NOT change the case of letters already typed
+let g:ycm_python_binary_path = 'python'
+let g:ycm_rust_src_path = '$RESOURCE_PATH/Rust/src_copy/src'
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
