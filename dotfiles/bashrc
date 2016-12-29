@@ -131,6 +131,18 @@ fi
 # Use the "go" function instead of cd https://github.com/skrulcik/go-navigator
 . $RESOURCE_PATH/bin/go-navigator/go
 
+# Create a consistently-available ~/tmp directory that holds only the current
+# user's temporary files
+if [ -z $USER_TMP_DIR ];
+then
+    export USER_TMP_DIR="/tmp/$USER";
+fi
+mkdir -p "$USER_TMP_DIR";
+if [ ! -e "$HOME/tmp" ];
+then
+    ln -s "$USER_TMP_DIR" "$HOME/tmp";
+fi
+
 gpi_makemake() {
     supported_extensions='tex java c c0'
     found=0
