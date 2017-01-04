@@ -2,11 +2,13 @@
 #
 # Creates symbolic links between dotfiles and their counterparts in this
 # resources directory
+#
+# Git configuration from http://tbaggery.com/2011/08/08/effortless-ctags-with-git.html
 
 # Get directory code from:
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-which-directory-it-is-stored-in
 THIS_FOLDER="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-DOTFILES=(vimrc bashrc gitconfig tmux.conf ycm_extra_conf.py)
+DOTFILES=(vimrc bashrc gitconfig tmux.conf ycm_extra_conf.py git_template)
 
 # First copy standard dotfiles
 for i in ${DOTFILES[@]};
@@ -43,4 +45,4 @@ else
 fi
 
 echo 'Updating Vim plugins...'
-vim +PluginInstall +qall
+vim +PluginClean +PluginInstall +PluginUpdate +qall

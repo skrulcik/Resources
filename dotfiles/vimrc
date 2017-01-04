@@ -138,8 +138,8 @@ noremap <silent> J <C-d>
 noremap <silent> K <C-u>
 noremap <silent> B 10b
 noremap <silent> W 10w
-" Case-insensitive search
-nnoremap ? /\c
+" Tag search
+noremap ? :CtrlPTag<cr>
 
 " === Commands/Aliases ===
 " Clean workspace: remove search highlights, close preview and quickfix windows

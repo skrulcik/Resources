@@ -40,3 +40,5 @@
 	added = green
 	changed = yellow
 	untracked = blue
+[init]
+	templatedir = ~/.git_template
