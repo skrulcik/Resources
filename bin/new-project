@@ -11,9 +11,43 @@ then
     exit -1;
 fi
 
-case $1 in
+language=$1
+name=$2
+
+case $language in
 rust)
-    cargo new $2 --bin;
+    cargo new $name --bin;
+    ;;
+java)
+    # Create a top-level project directory
+    mkdir -p $name && cd $name
+    # Initialize a Java project
+    gradle init --type java-library
+    # Remove auto-generated files
+    rm src/{main,test}/java/*.java
+    # Generate appropriately-named source and test directories
+    mkdir -p src/main/java/com/skrulcik/$name/main
+    mkdir -p src/test/java/com/skrulcik/$name
+    # Create shortcuts to those source directories for faster opening
+    ln -s src/main/java/com/skrulcik/$name/ code
+    ln -s src/test/java/com/skrulcik/$name/ test
+    printf "package com.skrulcik.$name.main;\n\n" >> code/main/Main.java
+    printf "public final class Main {\n" >> code/main/Main.java
+    printf "    public static void main(String[] args) {\n" >> code/main/Main.java
+    printf "    }\n" >> code/main/Main.java
+    printf "}\n" >> code/main/Main.java
+    # Set up Eclipse plugin, so Eclim auto-complete works out of the box
+    echo '// Generate .classpath for Eclipse and Eclim compatibility' >> build.gradle
+    echo 'apply plugin: "eclipse"' >> build.gradle
+    gradle eclipse
+    # Set up a gradle run task using the application plugin
+    echo '// Create a run task' >> build.gradle
+    echo 'apply plugin: "application"' >> build.gradle
+    echo "mainClassName=com.skrulcik.$name.main.Main" >> build.gradle
+    # Import project to Eclim to set up decent autocomplete
+    vim +"ProjectImport ." +qall
+    # Initialize the git repo
+    git init
     ;;
 *)
     echo "$1 is not currently supported by new_project";

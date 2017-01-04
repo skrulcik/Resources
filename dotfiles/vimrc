@@ -18,6 +18,7 @@ Plugin 'gmarik/Vundle.vim'
 " Appearance
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'Yggdroot/indentLine'            " Display indentation levels
 
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
@@ -31,8 +32,9 @@ Plugin 'scrooloose/syntastic'           " Check for syntax errors
 Plugin 'valloric/youcompleteme'         " Autocomplete
 Plugin 'ntpeters/vim-better-whitespace' " Strip trailing whitespace
 Plugin 'godlygeek/tabular'              " Align CSV files and Markdown tables
-Plugin 'Raimondi/delimitMate'           " Auto closing
 Plugin 'tpope/vim-commentary'           " Comment/Uncomment blocks
+Plugin 'SirVer/ultisnips'               " Snippet engine
+Plugin 'honza/vim-snippets'             " Repository of actual snippets
 
 " Tags
 Plugin 'szw/vim-tags'                   " Generate tag files
@@ -90,11 +92,14 @@ set splitright      " vsplit to the right
 set fileignorecase  " Ignores case in file completion
 set wildmenu        " Show potential matches above completion,
 set wildmode=full   " completing the first immediately
+set wildignore+=*/build/** " ignore build folders
+set wildignore+=*.o " Ignore object files
 
 " Force write readonly files using sudo
 command! WS w !sudo tee %
 " Exit insert mode with kj which is faster than escape
 inoremap kj <ESC>
+vnoremap kj <ESC>
 " Allow mouse interaction
 if has('mouse')
     set mouse=a
@@ -137,8 +142,8 @@ noremap <silent> W 10w
 nnoremap ? /\c
 
 " === Commands/Aliases ===
-" clear hilighting from search
-nmap <leader><space> :noh<cr>
+" Clean workspace: remove search highlights, close preview and quickfix windows
+nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>
 " Toggle the sidebar for the plugin NERDTree
 nmap <silent> <leader>t :NERDTreeTabsToggle<cr>
 " Toggle the sidebar for the plugin tagbar
@@ -151,7 +156,7 @@ nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<
 " Force quit
 nnoremap <leader>Q :qall!<CR>
 " Write file, then make
-nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Make<CR>
+nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Dispatch<CR>
 " Recursive grep search, I find myself doing this a lot
 nnoremap <leader>g :!grep -rn<space>
 " Switch tabs with L and H like my Vimium configuration
@@ -209,10 +214,22 @@ augroup mySyntastic
   au FileType tex let b:syntastic_mode = "passive"
 augroup END
 
-" Auto-complete (YCM)
+" Auto-complete (YCM and Eclim)
 set noinfercase       " Does NOT change the case of letters already typed
-let g:ycm_python_binary_path = 'python'
-let g:ycm_rust_src_path = '$RESOURCE_PATH/Rust/src_copy/src'
+inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
+" Allows semantic completion of the Rust standard library
+let g:ycm_rust_src_path = '/Users/Scott/Resources/Rust/src_copy/src'
+" Makes eclim suggestions show up in YCM
+let g:EclimCompletionMethod = 'omnifunc'
+" Expand utlisnips snippets with a semicolon
+let g:UltiSnipsExpandTrigger = "<c-b>"
+let g:UltiSnipsJumpForwardTrigger = ";"
+let g:UltiSnipsJumpBackwardTrigger = ":"
+
+" IndentLine
+let g:indentLine_color_term = 236
+let g:indentLine_color_gui = '#303030'
+let g:indentLine_char = '│'
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -259,16 +276,6 @@ let g:better_whitespace_filetypes_blacklist=['gitcommit']
 " ... but strip it on save so that we're still safe
 autocmd FileType gitcommit autocmd BufWritePre <buffer> StripWhitespace
 
-" delimitMate - Autocloseable tags
-let delimitMate_expand_cr = 1
-augroup mydelimitMate
-  au!
-  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
-  au FileType tex let b:delimitMate_quotes = ""
-  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
-  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
-augroup END
-
 " Command Summary
 " \t = View File Tree
 " \b = View Outline
@@ -302,9 +309,15 @@ augroup myFiletypes
   au FileType gitconfig setlocal noexpandtab
   au FileType go setlocal noexpandtab
 
+  " Custom compilers used with tpope/vim-dispatch
+  au FileType rust let b:dispatch = 'cargo run'
+  au FileType java let b:dispatch = 'gradle run'
 augroup END
 
 " === Optional (Plugin) ===
 " Uncomment to open tagbar automatically whenever possible
 " autocmd BufEnter * nested :call tagbar#autoopen(0)
+" rust-vim
+" Automatically formats Rust files on save
+"let g:rustfmt_autosave = 1
 
