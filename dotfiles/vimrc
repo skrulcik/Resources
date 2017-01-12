@@ -62,7 +62,6 @@ Plugin 'tmux-plugins/vim-tmux'          " Syntax highlighting for tmux config
 " Misc
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jez/vim-superman'
-Plugin 'ConradIrwin/vim-bracketed-paste' " Automatically detect pasting
 Plugin 'tpope/vim-dispatch'              " Asynchronous commands
 
 call vundle#end()
@@ -190,7 +189,6 @@ let g:netrw_liststyle=3      " When viewing directories, show nested tree mode
 let g:netrw_dirhistmax = 0   " Don't create .netrwhist files
 
 " Airline
-let g:airline_detect_paste=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='murmur'
 let g:airline#extensions#tabline#enabled=1
@@ -320,4 +318,5 @@ augroup END
 " rust-vim
 " Automatically formats Rust files on save
 "let g:rustfmt_autosave = 1
+set clipboard=unnamed
 
