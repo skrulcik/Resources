@@ -236,6 +236,7 @@ let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
 let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
+let g:vim_markdown_conceal = 0
 
 " === Tags ===
 let g:vim_tags_auto_generate=1
@@ -296,6 +297,8 @@ augroup myFiletypes
   au BufRead,BufNewFile *.gradle setlocal filetype=groovy
   " gitconfig files
   au BufRead,BufNewFile gitconfig setlocal filetype=gitconfig
+  " html Files
+  au BufRead,BufNewFile html setlocal filetype=html
 
   " Turn on spell checking and 80-char lines by default for these filetypes
   au FileType pandoc,markdown,tex setlocal spell
@@ -311,6 +314,10 @@ augroup myFiletypes
   " Custom compilers used with tpope/vim-dispatch
   au FileType rust let b:dispatch = 'cargo run'
   au FileType java let b:dispatch = 'gradle run'
+
+  " Smaller html indentation
+  au FileType html setlocal tabstop=2
+  au FileType html setlocal shiftwidth=2
 augroup END
 
 " === Optional (Plugin) ===
