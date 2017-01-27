@@ -2,4 +2,10 @@
 # realpath - gets the full pathname of a file, similar to the realpath available on linux platforms
 # Ripped from: http://stackoverflow.com/a/3915420/3857959
 
-echo $(cd $(dirname $1); pwd)/$(basename $1);
+if [ "$#" = 1 ];
+then
+    echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"
+else
+    echo "usage: realname path" >&2
+fi
+
