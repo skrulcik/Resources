@@ -227,7 +227,7 @@ let g:UltiSnipsJumpBackwardTrigger = ":"
 
 " IndentLine
 let g:indentLine_color_term = 236
-let g:indentLine_color_gui = '#303030'
+let g:indentLine_setColors = 0
 let g:indentLine_char = '│'
 
 " vim-markdown
@@ -308,6 +308,7 @@ augroup myFiletypes
   " Turn on spell checking and 80-char lines by default for these filetypes
   au FileType pandoc,markdown,tex setlocal spell
   au FileType pandoc,markdown,tex setlocal tw=80
+  au FileType pandoc,markdown,tex hi Conceal guifg=#FFFFFF guibg=#000000 ctermfg=15 ctermbg=0
 
   " Use table of contents instead of tagbar for markdown
   au FileType markdown map <buffer> <silent> <leader>b :Toc<cr>

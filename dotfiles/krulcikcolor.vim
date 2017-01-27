@@ -43,6 +43,7 @@ hi IncSearch    guifg=#767676 guibg=#5F87FF                     ctermfg=243 cter
 
 " medium gray on black
 hi Comment guifg=#767676 ctermfg=243 cterm=none
+hi Conceal guifg=#767676 guibg=#000000 ctermfg=243 ctermbg=0 cterm=none
 hi SpecialComment   guifg=#767676 ctermfg=243 gui=underline cterm=underline term=underline
 hi CursorLine guibg=#000000 ctermbg=236 gui=underline cterm=underline term=underline
 " green on black

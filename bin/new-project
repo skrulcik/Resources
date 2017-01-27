@@ -49,6 +49,15 @@ java)
     # Initialize the git repo
     git init
     ;;
+tex)
+    # Create a top-level project directory
+    mkdir -p $name && cd $name;
+    # Copy LaTeX template file
+    cp "$RESOURCE_PATH/templates/LaTeX/master.tex" ./$name.tex;
+    # Generate a makefile
+    echo "TARGET=$name" >> Makefile;
+    cat "$RESOURCE_PATH/templates/LaTeX/latex.mk" >> Makefile;
+    ;;
 *)
     echo "$1 is not currently supported by new_project";
     exit -2;
