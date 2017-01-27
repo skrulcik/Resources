@@ -17,3 +17,10 @@ then
     bash $RESOURCE_PATH/dotfiles/SetMacDefaults.sh
 fi
 
+# If not already done, update submodule for go command
+if [ ! -e $RESOURCE_PATH/bin/go-navigator/go ];
+then
+    git submodule init
+fi
+# Update in case there are new changes
+git submodule update
