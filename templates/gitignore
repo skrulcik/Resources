@@ -1,0 +1,18 @@
+# Patterns: Ignore executables
+*
+!*.*
+!*/
+
+# Explicit ingore
+.DS_Store
+
+# Common generated files
+*.class
+*.o
+*/_site/*
+*/bin/*
+*/build/*
+
+# Questionable generated files
+# *.pdf
+# *.html

@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+
+% Import ======================================================================
+% Standard Preamble
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fancyheadings}
+\usepackage{array}
+\usepackage{tikz}
+\setlength{\headheight}{14pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+\usepackage[left=.75 in, right=.75 in,top=.85 in, bottom=.75 in]{geometry}
+
+% Tex Styles
+\usepackage{hyperref} % url and href macros
+\usepackage{framed} % framed, shaded, leftbar environment
+\usepackage{xcolor}
+
+% Fonts
+\usepackage{courier}
+\usepackage[scaled]{helvet}
+\renewcommand\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
+
+% Programming
+\usepackage{algorithm2e}
+\usepackage{listings}
+\usepackage{syntax} % grammar environment
+
+% Package configuration
+\usetikzlibrary{automata,shapes,positioning}
+
+% Macros  =====================================================================
+% Formatting
+\def\block{\begin{addmargin}[2em]{0em}}
+\def\endblock{\end{addmargin}}
+\newenvironment{question}[1]{%
+\vspace{1em} \hrule \vspace{0.5em}%
+    \noindent{\bf #1}%
+\vspace{0.5em} \hrule \vspace{0.5em}%
+}{}
+
+% Phonetic Math Symbols
+\providecommand{\nullset}{\varnothing}
+\providecommand{\implies}{\Rightarrow}
+\providecommand{\ifff}{\Leftrightarrow}
+\providecommand{\st}{\text{ s.t. }}
+\providecommand{\conj}{\wedge}
+\providecommand{\disj}{\vee}
+\providecommand{\inv}[1]{{#1}^{-1}}
+\providecommand{\abs}[1]{\left\vert#1\right\vert}
+\providecommand{\norm}[1]{\left\Vert#1\right\Vert}
+\providecommand{\divides}{\vert}
+\providecommand{\setdiff}[3]{((#1\in #2)\land(#1\not\in #3))}
+\providecommand{\dif}[2]{\frac{d}{d#2}\left(#1\right)}
+\providecommand{\ceil}[1]{\left\lceil#1\right\rceil}
+\providecommand{\floor}[1]{\left\lfloor#1\right\rfloor}
+\providecommand{\set}[1]{\left\{#1\right\}}
+\providecommand{\setbuild}[2]{\{#1 \; \big{\vert}\; #2\}}
+
+% Programming Macros
+\providecommand{\c}[1]{\texttt{#1}}
+\providecommand{\bigO}[1]{\mathcal{O}({#1})}
+\providecommand{\mlneg}{$\sim$} % A tilde is used to negate in SML
+
+% Listing environments
+\newenvironment{SML}[1]{%
+\lstset{escapechar=@,style=SML}%
+\begin{lstlisting}%
+{#1}%
+\end{lstlisting}%
+}{}
+\newenvironment{C}[1]{%
+\lstset{escapechar=@,style=C}%
+\begin{lstlisting}%
+{#1}%
+\end{lstlisting}%
+}{}
+\newenvironment{Python}[1]{%
+\lstset{escapechar=@,style=Python}%
+\begin{lstlisting}%
+{#1}%
+\end{lstlisting}%
+}{}
+\newenvironment{Java}[1]{%
+\lstset{escapechar=@,style=Java}%
+\begin{lstlisting}%
+{#1}%
+\end{lstlisting}%
+}{}
+\newenvironment{Err}[1]{%
+\lstset{escapechar=@,style=Err}%
+\begin{lstlisting}%
+{#1}%
+\end{lstlisting}%
+}{}
+
+% Programming Languages =======================================================
+\lstdefinestyle{ERR}{
+     belowcaptionskip=1\baselineskip,
+     breaklines=true,
+     frame=L,
+     xleftmargin=4em,
+     xrightmargin=4em,
+     language=ML,
+     showstringspaces=false,
+     basicstyle=\footnotesize\ttfamily\color{red},
+     keywordstyle=\color{red},
+     commentstyle=\color{red},
+     identifierstyle=\color{red},
+     stringstyle=\color{red},
+}
+\lstdefinestyle{SML}{
+     belowcaptionskip=1\baselineskip,
+     breaklines=true,
+     frameround=tttt,
+     frame=trbl,
+     xleftmargin= 2em,
+     xrightmargin= 3em,
+     language=ML,
+     escapeinside={!}{!},
+     showstringspaces=false,
+     basicstyle=\footnotesize\ttfamily,
+     keywordstyle=\bfseries\color{green!40!black},
+     commentstyle=\itshape\color{purple!40!black},
+     identifierstyle=\color{blue},
+     stringstyle=\color{orange},
+}
+\lstdefinestyle{C}{
+     belowcaptionskip=1\baselineskip,
+     breaklines=true,
+     frameround=tttt,
+     frame=trbl,
+     xleftmargin= 2em,
+     xrightmargin= 3em,
+     language=C,
+     escapeinside={!}{!},
+     showstringspaces=false,
+     basicstyle=\footnotesize\ttfamily,
+     keywordstyle=\bfseries\color{green!40!black},
+     commentstyle=\itshape\color{purple!40!black},
+     identifierstyle=\color{blue},
+     stringstyle=\color{orange},
+}
+\lstdefinestyle{Java}{
+     belowcaptionskip=1\baselineskip,
+     breaklines=true,
+     frameround=tttt,
+     frame=trbl,
+     xleftmargin= 2em,
+     xrightmargin= 3em,
+     language=Java,
+     escapeinside={!}{!},
+     showstringspaces=false,
+     basicstyle=\footnotesize\ttfamily,
+     keywordstyle=\bfseries\color{green!40!black},
+     commentstyle=\itshape\color{purple!40!black},
+     identifierstyle=\color{blue},
+     stringstyle=\color{orange},
+}
+\lstdefinestyle{Python}{
+     belowcaptionskip=1\baselineskip,
+     breaklines=true,
+     frameround=tttt,
+     frame=trbl,
+     xleftmargin= 2em,
+     xrightmargin= 3em,
+     language=Python,
+     escapeinside={!}{!},
+     showstringspaces=false,
+     basicstyle=\footnotesize\ttfamily,
+     keywordstyle=\bfseries\color{green!40!black},
+     commentstyle=\itshape\color{purple!40!black},
+     identifierstyle=\color{blue},
+     stringstyle=\color{orange},
+}
+\lstset{escapechar=@,style=C}
+
+% Header  =====================================================================
+\newcommand{\myname}{Scott Krulcik}
+\newcommand{\myID}{skrulcik}
+\newcommand{\mytitle}{Title}
+
+\pagestyle{fancyplain}
+\lhead{\fancyplain{}{\myname}}
+\chead{\fancyplain{}{\textbf{\mytitle}}}
+\rhead{\fancyplain{}{\myID}}
+
+% Document  ===================================================================
+\begin{document}
+
+\centerline{\Large\bf \mytitle}
+\centerline{\myname}
+\centerline{\today}
+
+\end{document}
+
