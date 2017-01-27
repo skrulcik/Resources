@@ -150,12 +150,12 @@ nmap <silent> <leader>b :TagbarToggle<cr>
 " Toggle files with A.vim
 nmap <silent> <leader>a :A<cr>
 " Trim whitespace and save
-nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>
-nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :wq<CR>
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>
+nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :wq<cr>
 " Force quit
-nnoremap <leader>Q :qall!<CR>
+nnoremap <leader>Q :qall!<cr>
 " Write file, then make
-nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR> :w<CR>:Dispatch<CR>
+nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>:Dispatch<cr>
 " Recursive grep search, I find myself doing this a lot
 nnoremap <leader>g :!grep -rn<space>
 " Switch tabs with L and H like my Vimium configuration
@@ -238,13 +238,18 @@ let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_conceal = 0
 
+" tex
+let g:tex_conceal= 'adgm'
+set cole=2
+let g:tex_conceal= 'adgm'
+
 " === Tags ===
 let g:vim_tags_auto_generate=1
 let g:vim_tags_use_vim_dispatch=1
 " Open tag in vertical window
-nmap <leader>] :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <leader>] :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
 " Open tag in new tab
-nmap <leader>} :tabe <CR>:exec("tag ".expand("<cword>"))<CR>
+nmap <leader>} :tabe <cr>:exec("tag ".expand("<cword>"))<cr>
 " Find callers with cscope - http://stackoverflow.com/q/19469770
 function! Csc()
   " Find callers of the function under the cursor
@@ -252,7 +257,7 @@ function! Csc()
   copen
 endfunction
 command! Csc call Csc()
-nmap <leader>[ :Csc<CR>
+nmap <leader>[ :Csc<cr>
 
 " Reconfigure the tagbar for latex
 let g:tagbar_type_tex = {
