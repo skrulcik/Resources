@@ -1,10 +1,8 @@
 " Scott Krulcik vimrc
-
+"
 " Acks:
 " Originally inspired by Jake Zimmerman's vimrc  Jake: github.com/jez
 " Also drew from bezi, jfrazelle, tpope
-" Color scheme based on the iTerm Neutron theme, ported to vim by Joseph
-" Wecker
 
 set nocompatible
 
@@ -19,27 +17,24 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'Yggdroot/indentLine'            " Display indentation levels
-
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
 Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
 Plugin 'ctrlpvim/ctrlp.vim'             " Find files
 Plugin 'vim-scripts/a.vim'              " Open alternates
 Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
-
 " Code Editing
 Plugin 'scrooloose/syntastic'           " Check for syntax errors
 Plugin 'valloric/youcompleteme'         " Autocomplete
+Plugin 'SirVer/ultisnips'               " Snippet engine
+Plugin 'skrulcik/vim-snippets'          " Repository of actual snippets
 Plugin 'ntpeters/vim-better-whitespace' " Strip trailing whitespace
 Plugin 'godlygeek/tabular'              " Align CSV files and Markdown tables
 Plugin 'tpope/vim-commentary'           " Comment/Uncomment blocks
-Plugin 'SirVer/ultisnips'               " Snippet engine
-Plugin 'honza/vim-snippets'             " Repository of actual snippets
-
 " Tags
-Plugin 'szw/vim-tags'                   " Generate tag files
+Plugin 'xolox/vim-misc'                 " Used by easy-tags
+Plugin 'xolox/vim-easytags'             " Generates tag files
 Plugin 'majutsushi/tagbar'              " Display tags in vertical split
-
 " Syntax
 Plugin 'sudar/vim-arduino-syntax'       " Arduino support
 Plugin 'vim-jp/vim-cpp'                 " Improved C/C++ highlighting
@@ -48,7 +43,6 @@ Plugin 'tpope/vim-git'                  " Better diff/commit highlighting
 Plugin 'jez/vim-ispc'                   " Intel SPMD Program Compiler
 Plugin 'pangloss/vim-javascript'        " Javascript
 Plugin 'sheerun/vim-json'               " JSON, slightly different from js
-Plugin 'LaTeX-Box-Team/LaTeX-Box'       " LaTeX
 Plugin 'tpope/vim-liquid'               " Liquid templates
 Plugin 'plasticboy/vim-markdown'        " Featureful .md support,
                                         "   must be after tabular
@@ -61,8 +55,9 @@ Plugin 'tmux-plugins/vim-tmux'          " Syntax highlighting for tmux config
 
 " Misc
 Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'jez/vim-superman'
-Plugin 'tpope/vim-dispatch'              " Asynchronous commands
+Plugin 'jez/vim-superman'                " Jakes manpage viewer
+Plugin 'tpope/vim-dispatch'              " Asynchronous commands like Make
+Plugin 'xuhdev/vim-latex-live-preview'   " Live preview for LaTeX
 
 call vundle#end()
 filetype plugin indent on
@@ -78,6 +73,10 @@ set scrolloff=3     " Keeps a few lines between cursor and edge
 set sidescrolloff=5 " Keeps a few columnns between cursor and edge
 set showcmd         " Show multicharacter commands as they are being typed
 set ttyfast         " idk but bezi claims smoother performance
+set conceallevel=0  " Only conceal on demand
+if has('mouse')     " Allow mouse interaction
+    set mouse=a
+endif
 
 " === Search ===
 set hlsearch        " Highlight all search terms
@@ -92,32 +91,22 @@ set fileignorecase  " Ignores case in file completion
 set wildmenu        " Show potential matches above completion,
 set wildmode=full   " completing the first immediately
 set wildignore+=*/build/** " ignore build folders
-set wildignore+=*.o " Ignore object files
-
-" Force write readonly files using sudo
-command! WS w !sudo tee %
-" Exit insert mode with kj which is faster than escape
-inoremap kj <ESC>
-vnoremap kj <ESC>
-" Allow mouse interaction
-if has('mouse')
-    set mouse=a
-endif
+set wildignore+=*.o        " Ignore object files
+set wildignore+=*/_site/** " Ignore Jekyll site folders
 
 " === Appearance ===
-colorscheme krulcikcolor
 syntax on           " Syntax highlighting
-set number          " Line numbers
-set ruler           " Cursor position in file
-" set background=dark " Always keep a dark background
-" set cursorline      " Highlights/underlines current editor line
-" set cursorcolumn    " Highlights/underlines current editor column
-" set cc=81           " Puts barrier line at 80 columns
+colorscheme krulcikcolor
+" Identify the highlight region below the cursor
+" http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
+            \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " === Formatting ===
 set wrap
 set textwidth=79
-set formatoptions=qrn1
+set formatoptions=croqn1j
 
 " === Whitespace ===
 set autoindent
@@ -127,45 +116,31 @@ set softtabstop=4
 set shiftwidth=4
 set expandtab
 
-" === Keybindings ===
-" Set leader to Space, with comma as a fallback and as something to display
-let mapleader = ","
-let g:mapleader = ","
-map <space> <leader>
+" === Editor Keybindings ===
+" Exit insert mode with kj which is faster than escape
+inoremap kj <ESC>
+vnoremap kj <ESC>
 " Scroll-like navigation
 noremap <silent> J <C-d>
 noremap <silent> K <C-u>
-noremap <silent> B 10b
-noremap <silent> W 10w
-" Tag search
-noremap ? :CtrlPTag<cr>
-
-" === Commands/Aliases ===
-" Clean workspace: remove search highlights, close preview and quickfix windows
-nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>
-" Toggle the sidebar for the plugin NERDTree
-nmap <silent> <leader>t :NERDTreeTabsToggle<cr>
-" Toggle the sidebar for the plugin tagbar
-nmap <silent> <leader>b :TagbarToggle<cr>
-" Toggle files with A.vim
-nmap <silent> <leader>a :A<cr>
-" Trim whitespace and save
-nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>
-nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :wq<cr>
-" Force quit
-nnoremap <leader>Q :qall!<cr>
-" Write file, then make
-nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>:Dispatch<cr>
-" Recursive grep search, I find myself doing this a lot
-nnoremap <leader>g :!grep -rn<space>
 " Switch tabs with L and H like my Vimium configuration
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
 nnoremap <silent> H :tabp<cr>
-" Search and replace the word under the cursor
-nnoremap <leader>/ *
-" Format the current paragraph (most useful in markdown)
-nnoremap <leader>f {)gq}
+" Set leader to Space, with comma as a fallback and as something to display
+let mapleader = ","
+let g:mapleader = ","
+map <space> <leader>
+" Force quit
+nnoremap <leader>Q :qall!<cr>
+nnoremap <leader>W :wqall!<cr>
+command! WS w !sudo tee %
+" Trim whitespace and save
+nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>
+nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :wq<cr>
+" Clean workspace: remove search highlights, close preview and quickfix windows
+nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>
+" Force write readonly files using sudo
 " Make navigating long, wrapped lines behave like normal lines
 noremap <silent> k gk
 noremap <silent> j gj
@@ -173,14 +148,36 @@ noremap <silent> 0 g0
 noremap <silent> $ g$
 noremap <silent> ^ g^
 noremap <silent> _ g_
-" Split and join lines
-nnoremap <leader>J :join<cr>
-nnoremap <leader>j i<cr><esc>k$
+
+" === Search Keybindings ===
+" Recursive grep search, I find myself doing this a lot
+nnoremap <leader>g :!grep -rn<space>
+" Search and replace the word under the cursor
+nnoremap <leader>/ *
 " Center search result on screen
 nmap n nzz
 nmap N Nzz
 " Jump to the end of the line when pasting
 nnoremap P p$
+
+" === Formatting Keybindings ===
+" Format the current paragraph (most useful in markdown)
+nnoremap <leader>f gq}
+" Split and join lines (join remapped from J)
+nnoremap <leader>J :join<cr>
+nnoremap <leader>j i<cr><esc>k$
+
+" === Plugin Keybindings ===
+" Toggle the sidebar for the plugin NERDTree
+nmap <silent> <leader>t :NERDTreeTabsToggle<cr>
+" Toggle the sidebar for the plugin tagbar
+nmap <silent> <leader>b :TagbarToggle<cr>
+" Toggle files with A.vim
+nmap <silent> <leader>a :A<cr>
+" Tag search
+nnoremap ? :CtrlPTag<cr>
+" Write file, then make
+nnoremap <silent> <leader>m :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>:Dispatch<cr>
 
 " === Plugin Settings ===
 
@@ -189,11 +186,9 @@ let g:netrw_liststyle=3      " When viewing directories, show nested tree mode
 let g:netrw_dirhistmax = 0   " Don't create .netrwhist files
 
 " Airline
-let g:airline_powerline_fonts=1
 let g:airline_theme='murmur'
 let g:airline#extensions#tabline#enabled=1
 let g:airline#extensions#hunks#non_zero_only = 1
-let g:airline#extensions#eclim#enabled = 1
 
 " TMUX
 " If the current buffer has unsaved changes, save it before navigating away
@@ -204,23 +199,16 @@ let g:tmux_navigator_save_on_switch = 1
 let g:nerdtree_tabs_open_on_console_startup=2
 
 " Syntastic
-let g:syntastic_error_symbol = '✘'
-let g:syntastic_warning_symbol = "▲"
-let g:syntastic_java_checkers=['']
+let g:syntastic_error_symbol = 'E'
+let g:syntastic_warning_symbol = 'W'
 augroup mySyntastic
   au!
   " Turn off syntastic for tex files
   au FileType tex let b:syntastic_mode = "passive"
 augroup END
 
-" Auto-complete (YCM and Eclim)
+" Auto-complete and snippets
 set noinfercase       " Does NOT change the case of letters already typed
-inoremap <expr> <Esc> pumvisible() ? "\<C-e>" : "\<Esc>"
-" Allows semantic completion of the Rust standard library
-let g:ycm_rust_src_path = '/Users/Scott/Resources/Rust/src_copy/src'
-" Makes eclim suggestions show up in YCM
-let g:EclimCompletionMethod = 'omnifunc'
-" Expand utlisnips snippets with a semicolon
 let g:UltiSnipsExpandTrigger = "<c-b>"
 let g:UltiSnipsJumpForwardTrigger = ";"
 let g:UltiSnipsJumpBackwardTrigger = ":"
@@ -228,7 +216,10 @@ let g:UltiSnipsJumpBackwardTrigger = ":"
 " IndentLine
 let g:indentLine_color_term = 236
 let g:indentLine_setColors = 0
-let g:indentLine_char = '│'
+let g:indentLine_char = '|'
+
+" rust-vim
+let g:rustfmt_autosave = 1
 
 " vim-markdown
 let g:vim_markdown_folding_disabled=1
@@ -238,39 +229,19 @@ let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_conceal = 0
 
-" tex
-let g:tex_conceal= 'adgm'
-set cole=2
-let g:tex_conceal= 'adgm'
-
 " === Tags ===
-let g:vim_tags_auto_generate=1
-let g:vim_tags_use_vim_dispatch=1
 " Open tag in vertical window
 nmap <leader>] :vsp <cr>:exec("tag ".expand("<cword>"))<cr>
 " Open tag in new tab
 nmap <leader>} :tabe <cr>:exec("tag ".expand("<cword>"))<cr>
-" Find callers with cscope - http://stackoverflow.com/q/19469770
-function! Csc()
-  " Find callers of the function under the cursor
-  cscope find c <cword>
-  copen
-endfunction
-command! Csc call Csc()
-nmap <leader>[ :Csc<cr>
-
-" Reconfigure the tagbar for latex
-let g:tagbar_type_tex = {
-\    'ctagstype' : 'tex',
-\    'kinds' : [
-\        's:sections',
-\        'g:graphics:0:0',
-\        'l:labels',
-\        'r:refs:1:0',
-\        'p:pagerefs:1:0'
-\    ],
-\    'sort' : 0,
-\ }
+" === xolox/vim-easytags settings ===
+set tags=./tags;,~/.vimtags
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_include_members = 1
+let g:easytags_resolve_links = 1
+let g:easytags_syntax_keyword = 'always' " Sacrifice accuracy for speed
 
 " git gutter
 hi clear SignColumn
@@ -281,12 +252,8 @@ let g:better_whitespace_filetypes_blacklist=['gitcommit']
 " ... but strip it on save so that we're still safe
 autocmd FileType gitcommit autocmd BufWritePre <buffer> StripWhitespace
 
-" Command Summary
-" \t = View File Tree
-" \b = View Outline
-" ctrl+p -> fuzzyfind -> ctrl+t = fuzzy find new tab
-" :AV = Open Counterpart/Alternative
-" :Tab /<exp> = align on <exp>
+" commentary: Add {Oca,S}ML support
+autocmd BufRead,BufNewFile *.ml setlocal commentstring=(*\ %s\ *)
 
 " === File Types ===
 augroup myFiletypes
@@ -307,8 +274,11 @@ augroup myFiletypes
 
   " Turn on spell checking and 80-char lines by default for these filetypes
   au FileType pandoc,markdown,tex setlocal spell
-  au FileType pandoc,markdown,tex setlocal tw=80
-  au FileType pandoc,markdown,tex hi Conceal guifg=#FFFFFF guibg=#000000 ctermfg=15 ctermbg=0
+  au FileType pandoc,markdown,tex setlocal formatoptions+=t
+  au FileType gitcommit setlocal formatoptions=
+
+  " Increase line length for Java
+  au FileType java setlocal textwidth=99
 
   " Use table of contents instead of tagbar for markdown
   au FileType markdown map <buffer> <silent> <leader>b :Toc<cr>
@@ -320,17 +290,77 @@ augroup myFiletypes
   " Custom compilers used with tpope/vim-dispatch
   au FileType rust let b:dispatch = 'cargo run'
   au FileType java let b:dispatch = 'gradle run'
-
-  " Smaller html indentation
-  au FileType html setlocal tabstop=2
-  au FileType html setlocal shiftwidth=2
 augroup END
 
-" === Optional (Plugin) ===
-" Uncomment to open tagbar automatically whenever possible
-" autocmd BufEnter * nested :call tagbar#autoopen(0)
-" rust-vim
-" Automatically formats Rust files on save
-"let g:rustfmt_autosave = 1
-set clipboard=unnamed
+" Disable LaTeX conceal
+let g:tex_conceal = ""
+
+" Eclim is heavyweight and I only want to use it occasionally
+function SetEclimOptions()
+    let g:airline#extensions#eclim#enabled = 1
+    let g:EclimCompletionMethod = 'omnifunc'
+    let g:syntastic_java_checkers=['']
+    augroup mbpFiletypes
+        au!
+        au FileType java nnoremap <leader>c :JavaCorrect<cr>
+        au FileType java nnoremap <leader>i :JavaImport<cr>
+        au FileType java nnoremap <leader>I :JavaImportOrganize<cr>
+        au FileType java nnoremap <leader>] :JavaSearch<cr>
+        au FileType java nnoremap <leader>} :JavaDocSearch<cr>
+    augroup END
+endfunction
+
+" OCaml editing is only wanted on certain hosts OCaml Editing
+function SetOCamlOptions()
+    let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+    execute "set rtp+=" . g:opamshare . "/merlin/vim"
+    let g:syntastic_ocaml_checkers = ['merlin']
+endfunction
+
+" SSH seems to have trouble with non-ascii characters
+function SetNonASCII()
+    let g:indentLine_char = '│'
+    let g:syntastic_error_symbol = '✘'
+    let g:syntastic_warning_symbol = "▲"
+endfunction
+
+" Certain features should only be used on high performance machines
+function SetHighPerformance()
+    let g:easytags_syntax_keyword = 'auto'
+endfunction
+
+function SetFuzzyFind()
+    " TODO
+endfunction
+
+" === Machine-Specific Settings ===
+if has("unix")
+    " evince is fairly widely available and is the most well supported
+    let g:livepreview_previewer = 'evince'
+    if hostname() =~? ".*\.cmu\.edu"
+        call SetOCamlOptions()
+        " Allow YCM configurations to be loaded from my private folder
+        let g:ycm_extra_conf_globlist = ['~/private/15*']
+    endif
+    if has("mac")
+        " Integrate with Mac system clipboard
+        set clipboard=unnamed
+        " Set PDF viewer to Preview (minimal support)
+        let g:livepreview_previewer = 'open -a Preview'
+        if hostname() == "SKrulcik MBP"
+            call SetEclimOptions()
+            call SetOCamlOptions()
+            call SetNonASCII()
+            call SetHighPerformance()
+            call SetFuzzyFind()
+            " Powerline fonts allow for prettier displays in airline
+            let g:airline_powerline_fonts = 1
+            " Allow YCM configurations to be loaded from my private folder
+            let g:ycm_extra_conf_globlist = ['~/Projects/*','~/.ycm_extra_conf.py','~/Google Drive/CMU/*']
+            " A copy of the Rust standard libraries used for semantic
+            " completion
+            let g:ycm_rust_src_path = '/Users/Scott/Projects/Rust/src_copy/src'
+        endif
+    endif
+endif
 
