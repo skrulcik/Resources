@@ -6,14 +6,15 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{amssymb}
-\usepackage{graphicx}
-\usepackage{fancyheadings}
 \usepackage{array}
+\usepackage{fancyhdr}
+\usepackage[left=1 in, right=1 in,top=.85 in, bottom=.75 in]{geometry}
+\usepackage{graphicx}
+\usepackage{enumerate}
 \usepackage{tikz}
 \setlength{\headheight}{14pt}
 \setlength{\parindent}{0pt}
 \setlength{\parskip}{6pt}
-\usepackage[left=.75 in, right=.75 in,top=.85 in, bottom=.75 in]{geometry}
 
 % Tex Styles
 \usepackage{hyperref} % url and href macros
@@ -25,6 +26,7 @@
 \usepackage[scaled]{helvet}
 \renewcommand\familydefault{\sfdefault}
 \usepackage[T1]{fontenc}
+\usepackage[helvet]{sfmath}
 
 % Programming
 \usepackage{algorithm2e}
@@ -193,7 +195,9 @@
 % Document  ===================================================================
 \begin{document}
 
+\vspace{1 em}
 \centerline{\Large\bf \mytitle}
+\vspace{0.5 em}
 \centerline{\myname}
 \centerline{\today}
 
