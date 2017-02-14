@@ -15,6 +15,7 @@
 */_site/*
 */bin/*
 */build/*
+ctags
 
 # Questionable generated files
 # *.pdf
