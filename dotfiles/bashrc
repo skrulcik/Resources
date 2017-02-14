@@ -150,14 +150,14 @@ fi
 
 ## Hostname-specific changes
 promptText=""
-case "$(hostname)" in
+case $(hostname) in
     "SKrulcik MBP")
         export promptText=""
         ;;
     "scottylabs-cmu")
         export promptText="sl"
         ;;
-    "*.cmu.edu")
+    unix*.andrew.cmu.edu)
         export promptText="andrew"
         ;;
     *)
