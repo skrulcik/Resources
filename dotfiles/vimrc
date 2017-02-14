@@ -101,7 +101,7 @@ colorscheme krulcikcolor
 " http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<'
             \ . synIDattr(synID(line("."),col("."),0),"name") . "> lo<"
-            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+            \ . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<cr>
 
 " === Formatting ===
 set wrap
@@ -127,6 +127,7 @@ noremap <silent> K <C-u>
 set switchbuf=usetab
 nnoremap <silent> L :tabn<cr>
 nnoremap <silent> H :tabp<cr>
+nnoremap <BS> <C-^>
 " Set leader to Space, with comma as a fallback and as something to display
 let mapleader = ","
 let g:mapleader = ","
@@ -330,7 +331,11 @@ function SetHighPerformance()
 endfunction
 
 function SetFuzzyFind()
-    " TODO
+    set rtp-=~/.vim/bundle/ctrlp.vim
+    set rtp+=/usr/local/opt/fzf
+    " TODO Better FZF tag search
+    unmap ?
+    nnoremap <C-p> :FZF<cr>
 endfunction
 
 " === Machine-Specific Settings ===
