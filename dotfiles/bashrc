@@ -101,8 +101,7 @@ gmux() {
         echo 'Usage: gmux <session name>'
     else
         # Attempt to go to the given directory
-        go "$1" >/dev/null 2>/dev/null;
-        tmux attach-session -dt $1 || tmux new -s $1
+        tmux attach-session -dt $1 || go "$1" >/dev/null 2>/dev/null; tmux new -s $1
     fi
 }
 
