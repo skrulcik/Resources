@@ -149,6 +149,9 @@ noremap <silent> 0 g0
 noremap <silent> $ g$
 noremap <silent> ^ g^
 noremap <silent> _ g_
+" Yank and paste to end of line
+nnoremap P $p
+nnoremap Y v$y
 
 " === Search Keybindings ===
 " Recursive grep search, I find myself doing this a lot
@@ -158,8 +161,6 @@ nnoremap <leader>/ *
 " Center search result on screen
 nmap n nzz
 nmap N Nzz
-" Jump to the end of the line when pasting
-nnoremap P p$
 
 " === Formatting Keybindings ===
 " Format the current paragraph (most useful in markdown)
