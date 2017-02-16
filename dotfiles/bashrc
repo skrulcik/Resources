@@ -151,8 +151,8 @@ alias gn='go-navigate'
 
 ## Hostname-specific changes
 promptText=""
-case $(hostname) in
-    "SKrulcik MBP")
+case $(text2lower $(hostname)) in
+    "skrulcik mbp")
         # Disable kqueue in tmux 2.2 (broken on OSX, runs fine despite this)
         export EVENT_NOKQUEUE=1
         # Update classpath
