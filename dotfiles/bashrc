@@ -57,11 +57,11 @@ alias grbc='git rebase --continue'
 grbi() { git rebase -i HEAD~$1; }
 clone() {
     git clone "git@github.com:$1/$2.git";
-    go $2 || cd $2
+    go-navigate $1 || cd $1;
 }
 
 # Makes a directory, then moves into it
-mkcd() { mkdir -p "$@" && cd "$_"; }
+mkcd() { mkdir -p "$@" && go-navigate "$_"; }
 
 # Export resource path to a global variable
 export RESOURCE_PATH=`cat ~/.krulcik_resource_path`
@@ -145,8 +145,9 @@ else
   alias pbpaste='xclip -selection clipboard -o'
 fi
 
-# Use the "go" function instead of cd https://github.com/skrulcik/go-navigator
-. $RESOURCE_PATH/bin/go-navigator/go
+# Use the "go-navigate" function instead of cd https://github.com/skrulcik/go-navigator
+. $RESOURCE_PATH/bin/go-navigator/go-navigate
+alias gn='go-navigate'
 
 ## Hostname-specific changes
 promptText=""
