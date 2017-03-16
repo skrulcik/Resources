@@ -119,7 +119,6 @@ set expandtab
 " === Editor Keybindings ===
 " Exit insert mode with kj which is faster than escape
 inoremap kj <ESC>
-vnoremap kj <ESC>
 " Scroll-like navigation
 noremap <silent> J <C-d>
 noremap <silent> K <C-u>
@@ -140,7 +139,7 @@ command! WS w !sudo tee %
 nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>
 nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :wq<cr>
 " Clean workspace: remove search highlights, close preview and quickfix windows
-nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>
+nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>:NERDTreeClose<cr>
 " Force write readonly files using sudo
 " Make navigating long, wrapped lines behave like normal lines
 noremap <silent> k gk
@@ -151,7 +150,6 @@ noremap <silent> ^ g^
 noremap <silent> _ g_
 " Yank and paste to end of line
 nnoremap P $p
-nnoremap Y v$y
 
 " === Search Keybindings ===
 " Recursive grep search, I find myself doing this a lot
@@ -213,7 +211,7 @@ augroup END
 set noinfercase       " Does NOT change the case of letters already typed
 let g:UltiSnipsExpandTrigger = "<c-b>"
 let g:UltiSnipsJumpForwardTrigger = ";"
-let g:UltiSnipsJumpBackwardTrigger = ":"
+let g:UltiSnipsJumpBackwardTrigger = "<c-b>"
 
 " IndentLine
 let g:indentLine_color_term = 236
@@ -310,6 +308,8 @@ function SetEclimOptions()
         au FileType java nnoremap <leader>] :JavaSearch<cr>
         au FileType java nnoremap <leader>} :JavaDocSearch<cr>
     augroup END
+    command -nargs=? Dictionary call eclim#web#WordLookup(
+      \ 'http://dictionary.reference.com/search?q=<query>', '<args>')
 endfunction
 
 " OCaml editing is only wanted on certain hosts OCaml Editing
