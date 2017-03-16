@@ -43,7 +43,7 @@ java)
     # Set up a gradle run task using the application plugin
     echo '// Create a run task' >> build.gradle
     echo 'apply plugin: "application"' >> build.gradle
-    echo "mainClassName=com.skrulcik.$name.main.Main" >> build.gradle
+    echo "mainClassName=\"com.skrulcik.$name.main.Main\"" >> build.gradle
     # Import project to Eclim to set up decent autocomplete
     vim +"ProjectImport ." +qall
     # Initialize the git repo
