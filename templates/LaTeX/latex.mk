@@ -6,8 +6,9 @@ LATEXPDFS=$(patsubst %.tex,%.pdf,$(wildcard *.tex))
 $(LATEXPDFS): %.pdf: %.tex
 	pdflatex -interaction nonstopmode $(patsubst %.pdf,%.tex,$@)
 
+ARTIFACTS=*.aux *.log *.out
 clean:
-	rm *.aux *.log || true
+	rm $(ARTIFACTS) || true
 
 veryclean: clean
 	rm $(TARGET).pdf
