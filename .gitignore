@@ -12,9 +12,13 @@
 # Common generated files
 *.class
 *.o
+*.out
+*.aux
+*.log
 */_site/*
 */bin/*
 */build/*
+ctags
 
 # Questionable generated files
 # *.pdf
