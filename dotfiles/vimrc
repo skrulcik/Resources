@@ -339,6 +339,10 @@ function SetFuzzyFind()
     nnoremap <C-p> :FZF<cr>
 endfunction
 
+function LowPerformance()
+    let g:syntastic_java_checkers=['']
+endfunction
+
 " === Machine-Specific Settings ===
 if has("unix")
     " evince is fairly widely available and is the most well supported
@@ -347,6 +351,7 @@ if has("unix")
         call SetOCamlOptions()
         " Allow YCM configurations to be loaded from my private folder
         let g:ycm_extra_conf_globlist = ['~/private/15*']
+        call LowPerformance()
     endif
     if has("mac")
         " Integrate with Mac system clipboard
