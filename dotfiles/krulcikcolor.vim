@@ -83,14 +83,12 @@ hi PmenuThumb   guifg=#C6C6C6 ctermfg=251
 " white on black
 hi WildMenu     guifg=#FFFFFF guibg=#000000 ctermfg=15 ctermbg=0
 
-" Green background
-hi DiffChange   guibg=#00af5f ctermbg=35
-" Orange background
-hi DiffChange   guibg=#FF8C00 ctermbg=166
-" Orange text
-hi DiffText     guifg=#FF8C00 ctermfg=166 gui=underline term=underline
-" Red background
-hi DiffDelete   guibg=#800000 ctermbg=1
+" vimdiff - first clear all highligting, then implement a simple scheme
+hi clear DiffAdd DiffDelete DiffChange DiffText
+hi DiffText    ctermbg=236 ctermfg=166
+hi DiffChange  ctermbg=236 ctermfg=251
+hi DiffAdd     ctermbg=236 ctermfg=35
+hi DiffDelete  ctermbg=236 ctermfg=160
 
 " Spellcheck
 " Underline and make medium gray
