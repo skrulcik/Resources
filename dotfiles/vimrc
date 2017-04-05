@@ -227,7 +227,7 @@ let g:vim_markdown_frontmatter=1
 let g:vim_markdown_math=1
 let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
-let g:vim_markdown_conceal = 0
+let g:vim_markdown_conceal=0
 
 " === Tags ===
 " Open tag in vertical window
@@ -345,6 +345,18 @@ function LowPerformance()
     let g:syntastic_java_checkers=['']
 endfunction
 
+function ItalicTermFonts()
+    highlight Comment cterm=italic
+
+    " Allow markdown to use terminal bold and italic, and darken the plain text
+    " somewhat so the bold really stands out
+    let g:vim_markdown_conceal=2
+
+    " Add italic style to block quotes (which should already stand out a bit
+    " because of krulcikcolor-md)
+    highlight mkdBlockquote cterm=italic
+endfunction
+
 " === Machine-Specific Settings ===
 if has("unix")
     " evince is fairly widely available and is the most well supported
@@ -366,6 +378,7 @@ if has("unix")
             call SetNonASCII()
             call SetHighPerformance()
             call SetFuzzyFind()
+            call ItalicTermFonts()
             " Powerline fonts allow for prettier displays in airline
             let g:airline_powerline_fonts = 1
             " Allow YCM configurations to be loaded from my private folder
