@@ -151,6 +151,7 @@ alias gn='go-navigate'
 
 ## Hostname-specific changes
 promptText=""
+export TERM=xterm-256color
 case $(text2lower $(hostname)) in
     "skrulcik mbp")
         # Disable kqueue in tmux 2.2 (broken on OSX, runs fine despite this)
@@ -166,6 +167,7 @@ case $(text2lower $(hostname)) in
         export PATH=/Users/Scott/.cargo/bin:$PATH
         # Random executables I make
         export PATH="$HOME/bin:$PATH"
+        export TERM=xterm-256color-italic
         ;;
     "scottylabs-cmu")
         export promptText="sl"
