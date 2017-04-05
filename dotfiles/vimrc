@@ -271,6 +271,8 @@ augroup myFiletypes
   au BufRead,BufNewFile gitconfig setlocal filetype=gitconfig
   " html Files
   au BufRead,BufNewFile html setlocal filetype=html
+  " log files, which usually have long lines
+  au BufRead,BufNewFile *.log setlocal nowrap
 
   " Turn on spell checking and 80-char lines by default for these filetypes
   au FileType pandoc,markdown,tex setlocal spell
