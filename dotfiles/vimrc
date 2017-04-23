@@ -52,6 +52,7 @@ Plugin 'rust-lang/rust.vim'             " Rust
 Plugin 'cakebaker/scss-syntax.vim'      " SCSS
 Plugin 'keith/swift.vim'                " Swift!
 Plugin 'tmux-plugins/vim-tmux'          " Syntax highlighting for tmux config
+Plugin 'KeitaNakamura/tex-conceal.vim'  " LaTeX conceal extension
 
 " Misc
 Plugin 'christoomey/vim-tmux-navigator'
@@ -318,7 +319,7 @@ augroup myFiletypes
   au FileType java let b:dispatch = 'gradle run'
 augroup END
 
-" Disable LaTeX conceal
+" Disable LaTeX conceal - may be re-enabled below
 let g:tex_conceal = ""
 
 " Eclim is heavyweight and I only want to use it occasionally
@@ -348,6 +349,7 @@ endfunction
 " SSH seems to have trouble with non-ascii characters
 function SetNonASCII()
     let g:indentLine_char = '│'
+    let g:indentLine_concealcursor = ''
     let g:syntastic_error_symbol = '✘'
     let g:syntastic_warning_symbol = "▲"
 endfunction
@@ -363,6 +365,17 @@ function SetFuzzyFind()
     " TODO Better FZF tag search
     unmap ?
     nnoremap <C-p> :FZF<cr>
+endfunction
+
+function TexConceal()
+    " Set LaTeX conceal to conceal everything
+    let g:vim_markdown_conceal=2
+    au FileType markdown let g:tex_conceal="abdgms"
+    au FileType tex let g:tex_conceal="abdgms"
+
+    " Set conceal colors to be more like normal text
+    au FileType markdown hi! link Conceal Statement
+    au FileType tex hi! link Conceal Statement
 endfunction
 
 function LowPerformance()
@@ -403,6 +416,7 @@ if has("unix")
             call SetHighPerformance()
             call SetFuzzyFind()
             call ItalicTermFonts()
+            call TexConceal()
             " Powerline fonts allow for prettier displays in airline
             let g:airline_powerline_fonts = 1
             " Allow YCM configurations to be loaded from my private folder
