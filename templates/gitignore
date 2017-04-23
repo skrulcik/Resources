@@ -15,7 +15,7 @@
 *.out
 *.aux
 *.log
-*/_site/*
+_site/*
 */bin/*
 */build/*
 ctags
