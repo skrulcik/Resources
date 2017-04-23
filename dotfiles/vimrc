@@ -58,6 +58,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'jez/vim-superman'                " Jakes manpage viewer
 Plugin 'tpope/vim-dispatch'              " Asynchronous commands like Make
 Plugin 'xuhdev/vim-latex-live-preview'   " Live preview for LaTeX
+Plugin 'merlinrebrovic/focus.vim'        " Centers text in the middle of the window
 
 call vundle#end()
 filetype plugin indent on
@@ -140,7 +141,7 @@ command! WS w !sudo tee %
 nnoremap <leader>w :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :w<cr>
 nnoremap <leader>q :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<cr> :wq<cr>
 " Clean workspace: remove search highlights, close preview and quickfix windows
-nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>:NERDTreeClose<cr>
+nmap <silent> <leader><space> :noh<cr>:pclose<cr>:cclose<cr>:NERDTreeTabsClose<cr>
 " Force write readonly files using sudo
 " Make navigating long, wrapped lines behave like normal lines
 noremap <silent> k gk
@@ -229,6 +230,28 @@ let g:vim_markdown_math=1
 let g:vim_markdown_new_list_item_indent=4
 let g:vim_markdown_toc_autofit=1
 let g:vim_markdown_conceal=0
+
+" focus blended with CoderWall easy focus mode
+function! ToggleFocusMode()
+  if (&foldcolumn != 0)
+    set laststatus=2
+    set ruler
+    set cursorline
+    execute 'colorscheme ' . g:colors_name
+  else
+    set laststatus=0
+    set noruler
+    set nocursorline
+    hi FoldColumn ctermbg=none
+    hi NonText ctermfg=0 ctermbg=none
+    hi LineNr ctermfg=0 ctermbg=none
+    hi CursorLineNr ctermfg=0 ctermbg=none
+  endif
+  execute "normal \<Plug>FocusModeToggle"
+endfunc
+" Toggle focus mode
+let g:focus_use_default_mapping = 0
+nmap <silent> <leader>s :call ToggleFocusMode()<cr>
 
 " === Tags ===
 " Open tag in vertical window
