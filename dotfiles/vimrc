@@ -74,6 +74,7 @@ set sidescrolloff=5 " Keeps a few columnns between cursor and edge
 set showcmd         " Show multicharacter commands as they are being typed
 set ttyfast         " idk but bezi claims smoother performance
 set conceallevel=0  " Only conceal on demand
+set cursorline      " Highlight the line the cursor is on
 if has('mouse')     " Allow mouse interaction
     set mouse=a
 endif

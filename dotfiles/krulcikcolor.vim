@@ -48,7 +48,7 @@ hi IncSearch    guifg=#767676 guibg=#5f87d7                     ctermfg=243 cter
 hi Comment guifg=#767676 ctermfg=243 cterm=none
 hi Conceal guifg=#767676 guibg=#000000 ctermfg=243 ctermbg=0 cterm=none
 hi SpecialComment   guifg=#767676 ctermfg=243 gui=underline cterm=underline term=underline
-hi CursorLine guibg=#000000 ctermbg=236 gui=underline cterm=underline term=underline
+hi CursorLine guibg=#000000 gui=none ctermbg=236 cterm=none
 " green on black
 hi Constant     guifg=#00af5f ctermfg=35 cterm=none
 hi Identifier   guifg=#00af5f ctermfg=35 cterm=none
@@ -60,6 +60,7 @@ hi Statement    guifg=#FF8C00 ctermfg=166 cterm=none
 hi Type         guifg=#5f87d7 ctermfg=26 cterm=none
 hi Title        guifg=#5f87d7 ctermfg=26 cterm=none
 " light blue on black
+hi CursorLineNr guifg=#5f87ff ctermfg=69 cterm=none
 hi javaClassTag guifg=#5f87ff ctermfg=69
 hi javaInterfaceTag guifg=#5f87ff ctermfg=69
 hi cTypeTag guifg=#5f87ff ctermfg=69
