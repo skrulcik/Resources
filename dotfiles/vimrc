@@ -328,6 +328,7 @@ function SetEclimOptions()
     let g:airline#extensions#eclim#enabled = 1
     let g:EclimCompletionMethod = 'omnifunc'
     let g:syntastic_java_checkers=['']
+    let g:EclimLoggingDisabled = 1
     augroup mbpFiletypes
         au!
         au FileType java nnoremap <leader>c :JavaCorrect<cr>
