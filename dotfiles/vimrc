@@ -23,6 +23,7 @@ Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
 Plugin 'ctrlpvim/ctrlp.vim'             " Find files
 Plugin 'vim-scripts/a.vim'              " Open alternates
 Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
+Plugin 'tpope/vim-fugitive'             " Git Utilities
 " Code Editing
 Plugin 'scrooloose/syntastic'           " Check for syntax errors
 Plugin 'valloric/youcompleteme'         " Autocomplete
