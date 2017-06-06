@@ -43,14 +43,16 @@ alias vs='vim -O'
 # Git Aliases
 alias ga='git add'
 alias gc='git commit'
-alias gl='git log --graph --color --pretty=oneline -n 20 --abbrev-commit'
-alias gla='git log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n" --stat'
-alias gs='git status -s'
-alias gsa='git status'
 alias gd='git diff'
 alias gdc='git diff --cached'
+alias gl='git log --graph --color --pretty=oneline -n 20 --abbrev-commit'
+alias gla='git log --graph --color --pretty=format:"%C(yellow)%H%C(green)%d%C(reset)%n%x20%cd%n%x20%cn%x20(%ce)%n%x20%s%n" --stat'
+alias gm='git merge'
 alias gpr='git pull --rebase'
+alias gs='git status -s'
+alias gsa='git status'
 alias gundo='git checkout --'
+alias greset='git reset HEAD'
 # `gdi $number` shows the diff between the state `$number` revisions ago and the current state
 alias gdi='d() { git diff --patch-with-stat HEAD~$1; }; git diff-index --quiet HEAD -- || clear; d'
 alias grbc='git rebase --continue'
@@ -152,6 +154,7 @@ alias gn='go-navigate'
 ## Hostname-specific changes
 promptText=""
 export TERM=xterm-256color
+export EDITOR='vim'
 case $(text2lower $(hostname)) in
     "skrulcik mbp")
         # Disable kqueue in tmux 2.2 (broken on OSX, runs fine despite this)
