@@ -1,6 +1,6 @@
 // Allow navigation between emails, and delete/create options
 https?://inbox.google.com/* jkecrfv
 // Allow keyboard shortcuts in regular gmail (next, previous, archive, move, select, delete, search)
-https?://mail.google.com/mail/* npevx#/
+https?://mail.google.com/mail/* npemx#/
 // Allows navigation up and down between emails in the inbox list, while keeping scrolling behavior on opened emails
 https?://mail.google.com/mail/u/1/#inbox jk
