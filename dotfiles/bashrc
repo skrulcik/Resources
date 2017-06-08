@@ -173,6 +173,9 @@ case $(text2lower $(hostname)) in
         alias ocaml='rlwrap ocaml'
         # Rust configuration
         export PATH=/Users/Scott/.cargo/bin:$PATH
+        # Go configuration
+        export GOPATH=$HOME/go
+        export PATH=$PATH:$GOPATH/bin
         # Random executables I make
         export PATH="$HOME/bin:$PATH"
         export TERM=xterm-256color-italic
