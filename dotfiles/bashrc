@@ -103,8 +103,13 @@ gmux() {
     then
         echo 'Usage: gmux <session name>'
     else
-        # Attempt to go to the given directory
-        tmux attach-session -dt $1 || tmux new -s $1
+        if [ "$1" = 'ls' ];
+        then
+            tmux ls
+        else
+            # Attempt to go to the given directory
+            tmux attach-session -dt $1 || tmux new -s $1
+        fi
     fi
 }
 
