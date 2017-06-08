@@ -16,13 +16,11 @@ Plugin 'gmarik/Vundle.vim'
 " Appearance
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Yggdroot/indentLine'            " Display indentation levels
 " File Management
 Plugin 'scrooloose/nerdtree'            " File navigator sidebar
 Plugin 'jistr/vim-nerdtree-tabs'        " NERDTree in all tabs
-Plugin 'ctrlpvim/ctrlp.vim'             " Find files
-Plugin 'vim-scripts/a.vim'              " Open alternates
 Plugin 'airblade/vim-gitgutter'         " Show git diff symbols in gutter
+Plugin 'rking/ag.vim'                   " Search ability
 Plugin 'tpope/vim-fugitive'             " Git Utilities
 " Code Editing
 Plugin 'scrooloose/syntastic'           " Check for syntax errors
