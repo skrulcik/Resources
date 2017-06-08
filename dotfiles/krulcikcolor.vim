@@ -2,8 +2,6 @@
 " Loosely based on the vim airline theme murmur, at least enough so they look
 " okay together
 
-set bg=dark " Once you go black...
-set number          " Line numbers
 hi clear
 if exists("syntax_on")
     syntax reset
@@ -60,7 +58,6 @@ hi Statement    guifg=#FF8C00 ctermfg=166 cterm=none
 hi Type         guifg=#5f87d7 ctermfg=26 cterm=none
 hi Title        guifg=#5f87d7 ctermfg=26 cterm=none
 " light blue on black
-hi CursorLineNr guifg=#5f87ff ctermfg=69 cterm=none
 hi javaClassTag guifg=#5f87ff ctermfg=69
 hi javaInterfaceTag guifg=#5f87ff ctermfg=69
 hi cTypeTag guifg=#5f87ff ctermfg=69
@@ -68,6 +65,7 @@ hi cEnumTag guifg=#5f87ff ctermfg=69
 
 " medium gray on dark gray
 hi LineNr       guifg=#767676 guibg=#303030 ctermfg=243 ctermbg=236
+hi CursorLineNr guifg=#303030 guibg=#767676 ctermfg=236 ctermbg=243
 " Dark gray background
 hi ColorColumn  guibg=#303030 ctermbg=236
 hi NonText      guibg=#303030 ctermbg=236

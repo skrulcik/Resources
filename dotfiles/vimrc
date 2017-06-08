@@ -99,7 +99,9 @@ set wildignore+=*.o        " Ignore object files
 set wildignore+=*/_site/** " Ignore Jekyll site folders
 
 " === Appearance ===
-syntax on           " Syntax highlighting
+syntax enable
+set bg=dark " Once you go black...
+set number          " Line numbers
 colorscheme krulcikcolor
 " Identify the highlight region below the cursor
 " http://vim.wikia.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
