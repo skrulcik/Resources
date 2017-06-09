@@ -37,8 +37,6 @@ alias ccomp='gcc -Wall -Wextra -Werror -std=c99 -pedantic'
 alias valgrind-leak='valgrind --leak-check=full --show-reachable=yes'
 alias hidden='ls -a | grep "^\..*"'
 alias linelength='wc -L'
-alias v='vim -p'
-alias vs='vim -O'
 
 # Git Aliases
 alias ga='git add'
@@ -96,39 +94,16 @@ vman() {
     fi
 }
 
-# Open a tmux session if it doesn't exist, named after a similar script for
-# CITC clients I used at Google
-gmux() {
-    if [ -z "$1" ]
+# Import named bash modules that aren't applicable to all computers
+_import_module() {
+    if [ "$(which "$1")" ];
     then
-        echo 'Usage: gmux <session name>'
-    else
-        if [ "$1" = 'ls' ];
-        then
-            tmux ls
-        else
-            # Attempt to go to the given directory
-            tmux attach-session -dt $1 || tmux new -s $1
-        fi
+        source "$RESOURCE_PATH/dotfiles/bash_modules/$1.bash";
     fi
 }
-
-# Fuzzy find
-if [ -f ~/.fzf.bash ];
-then
-    source ~/.fzf.bash
-    # bind '"\C-p": "\C-x\C-a$a \C-x\C-addi`__fzf_select__`\C-x\C-e\C-x\C-a0Px$a \C-x\C-r\C-x\C-axa "'
-    bind -x '"\C-p": "fzf-file-widget"'
-    # Improves performance in git repositories, where I usually work
-    export FZF_DEFAULT_COMMAND='
-      (git ls-tree -r --name-only HEAD ||
-       find . -path "*/\.*" -prune -o -type f -print -o -type l -print |
-          sed s/^..//) 2> /dev/null'
-    # Add completion for my aliases
-    complete -F _fzf_path_completion -o default -o bashdefault v
-    complete -F _fzf_path_completion -o default -o bashdefault vs
-    complete -F _fzf_dir_completion -o default -o bashdefault go
-fi
+_import_module 'tmux';
+_import_module 'vim';
+_import_module 'fzf';
 
 ## Mac-specific changes
 if [[ "$(uname)" = "Darwin" ]]
