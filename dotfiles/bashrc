@@ -94,17 +94,6 @@ vman() {
     fi
 }
 
-# Import named bash modules that aren't applicable to all computers
-_import_module() {
-    if [ "$(which "$1")" ];
-    then
-        source "$RESOURCE_PATH/dotfiles/bash_modules/$1.bash";
-    fi
-}
-_import_module 'tmux';
-_import_module 'vim';
-_import_module 'fzf';
-
 ## Mac-specific changes
 if [[ "$(uname)" = "Darwin" ]]
 then
@@ -166,4 +155,16 @@ case $(text2lower $(hostname)) in
         ;;
 esac
 export PS1="\[\e[37m\]$promptText\[\e[m\]\[\033[01;34m\]>\[\033[00m\] ";
+
+# Import named bash modules that aren't applicable to all computers
+# Modules should be imported last, to ensure PATH is set to its final value
+_import_module() {
+    if [ "$(which "$1")" ];
+    then
+        source "$RESOURCE_PATH/dotfiles/bash_modules/$1.bash";
+    fi
+}
+_import_module 'tmux';
+_import_module 'vim';
+_import_module 'fzf';
 
