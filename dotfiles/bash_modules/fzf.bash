@@ -9,7 +9,7 @@ then
     then
         # Use ag "the silver searcher" as the default file listing command if
         # possible
-        export FZF_DEFAULT_COMMAND='ag -l -g "" 2> /dev/null';
+        export FZF_DEFAULT_COMMAND='ag -g . 2> /dev/null';
 
         # Fuzzy ag / ack / grep -rn
         agf() {
@@ -23,7 +23,7 @@ then
       then
           # If no file is given, pick one from the list
           local files
-          IFS=$'\n' files=($(fzf-tmux --query="$1" --multi --select-1 --exit-0))
+          IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
           [[ -n "$files" ]] && smart_vopen "${files[@]}"
       else
           smart_vopen $@
