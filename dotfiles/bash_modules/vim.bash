@@ -1,7 +1,7 @@
 # smart_vopen - Opens two files in a vertical split, if there is room,
 # in tabs otherwise
 smart_vopen() {
-    if [ $(tput cols) -gt 160 ];
+    if [ "$#" -eq 2 ] && [ $(tput cols) -gt 160 ];
     then
         # Open in a vertical split
         vim -O $@
