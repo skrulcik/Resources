@@ -23,7 +23,7 @@ then
       then
           # If no file is given, pick one from the list
           local files
-          IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
+          IFS=$'\n' files=($(fzf --query="$*" --multi --select-1 --exit-0))
           [[ -n "$files" ]] && smart_vopen "${files[@]}"
       else
           smart_vopen $@
@@ -36,7 +36,7 @@ then
           files=$(grep '^>' ~/.viminfo | cut -c3- |
                   while read line; do
                     [ -f "${line/\~/$HOME}" ] && echo "$line"
-                  done | fzf-tmux -d -m -q "$*" -1) && smart_vopen ${files//\~/$HOME}
+                  done | fzf --query="$*" --multi --select-1 --exit-0) && smart_vopen ${files//\~/$HOME}
     }
 
     # fup - cd up to a parent directory
@@ -51,7 +51,7 @@ then
           get_parent_dirs $(dirname "$1")
         fi
       }
-      local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf-tmux --tac)
+      local DIR=$(get_parent_dirs $(realpath "${1:-$PWD}") | fzf --tac)
       cd "$DIR"
     }
 
