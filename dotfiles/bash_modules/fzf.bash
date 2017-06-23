@@ -69,7 +69,7 @@ then
     # Add fuzzy commit finder and log filter if git is installed
     if [ "$(which git)" ];
     then
-        # gcf - copy commit SHA, to be used later in rebase or checkout
+        # gcom - copy commit SHA, to be used later in rebase or checkout
         gcom() {
           local commits commit
           commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
