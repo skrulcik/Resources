@@ -7,7 +7,7 @@
 	clean = git media clean %f
 	smudge = git media smudge %f
 [github]
-	user = SkottyK
+	user = skrulcik
 [push]
 	default = matching
 [filter "hawser"]
