@@ -57,7 +57,7 @@ alias grbc='git rebase --continue'
 grbi() { git rebase -i HEAD~$1; }
 clone() {
     git clone "git@github.com:$1/$2.git";
-    go-navigate $1 || cd "$@";
+    go-navigate $2 || cd "$2";
 }
 
 # Makes a directory, then moves into it
