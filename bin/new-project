@@ -58,6 +58,13 @@ tex)
     echo "TARGET=$name" >> Makefile;
     cat "$RESOURCE_PATH/templates/LaTeX/latex.mk" >> Makefile;
     ;;
+react)
+    if [[ ! -z $(which create-react-app) ]];
+    then
+        npm install -g create-react-app;
+        create-react-app $2;
+    fi
+    ;;
 *)
     echo "$1 is not currently supported by new_project";
     exit -2;
