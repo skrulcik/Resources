@@ -28,7 +28,7 @@ hi Normal       guifg=#FFFFFF guibg=#000000                     ctermfg=15 cterm
 hi Directory    guifg=#FFFFFF guibg=#000000                     ctermfg=15 ctermbg=0
 hi Underlined   cterm=underline term=underline
 " black on light gray
-hi Visual       guifg=#000000 guibg=#C6C6C6 gui=reverse,underline    ctermfg=0 ctermbg=251 cterm=reverse,underline
+hi Visual       guibg=#767676 gui=underline    ctermbg=243 cterm=underline
 
 " white on orange
 hi ErrorMsg     guifg=#FFFFFF guibg=#FF8C00                     ctermfg=15 ctermbg=166 term=bold
@@ -46,7 +46,7 @@ hi IncSearch    guifg=#767676 guibg=#5f87d7                     ctermfg=243 cter
 hi Comment guifg=#767676 ctermfg=243 cterm=none
 hi Conceal guifg=#767676 guibg=#000000 ctermfg=243 ctermbg=0 cterm=none
 hi SpecialComment   guifg=#767676 ctermfg=243 gui=underline cterm=underline term=underline
-hi CursorLine guibg=#000000 gui=none ctermbg=236 cterm=none
+hi CursorLine guibg=#303030 gui=none ctermbg=236 cterm=none
 " green on black
 hi Constant     guifg=#00af5f ctermfg=35 cterm=none
 hi Identifier   guifg=#00af5f ctermfg=35 cterm=none
