@@ -24,6 +24,8 @@ shopt -s checkwinsize         # Update window size after each command
 
 # History configuration
 export HISTCONTROL=ignoreboth # Don't store duplicates
+export HISTSIZE=10000
+export HISTFILESIZE=10000
 shopt -s histappend           # Append only to history
 
 # Remove case sensitive completion
