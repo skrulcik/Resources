@@ -370,14 +370,23 @@ function SetFuzzyFind()
 endfunction
 
 function TexConceal()
-    " Set LaTeX conceal to conceal everything
+    " Set LaTeX (and LaTeX in Markdown) to conceal everything
     let g:vim_markdown_conceal=2
-    au FileType markdown let g:tex_conceal="abdgms"
-    au FileType tex let g:tex_conceal="abdgms"
+    " LaTeX concealment options:
+    " a = accents/ligatures
+    " b = bold and italic
+    " d = delimiters
+    " m = math symbols
+    " g = Greek
+    " s = superscripts/subscripts
+    " au FileType markdown let g:tex_conceal="abdgm"
+    au FileType tex let g:tex_conceal="bdmg"
 
     " Set conceal colors to be more like normal text
     au FileType markdown hi! link Conceal Statement
+    au FileType markdown set conceallevel=2
     au FileType tex hi! link Conceal Statement
+    au FileType tex set conceallevel=2
 endfunction
 
 function LowPerformance()
