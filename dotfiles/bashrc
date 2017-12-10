@@ -147,7 +147,7 @@ case $(text2lower $(hostname)) in
         export PATH="$HOME/bin:$PATH"
         export TERM=xterm-256color-italic
         ;;
-    "scottylabs-cmu")
+    "scottylabs")
         export promptText="sl"
         ;;
     unix*.andrew.cmu.edu)
