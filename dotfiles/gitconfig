@@ -2,6 +2,7 @@
 [user]
 	name = Scott Krulcik
 	email = skrulcik@gmail.com
+	signingkey = 4EE9E7BF2636E0C1
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -43,3 +44,5 @@
 	untracked = blue
 [init]
 	templatedir = ~/.git_template
+[commit]
+	gpgsign = true
