@@ -11,8 +11,9 @@
 *.aux
 *.log
 _site/*
-*/bin/*
-*/build/*
+bin/
+build/
+generated/
 ctags
 tags
 
