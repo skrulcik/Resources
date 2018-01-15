@@ -36,7 +36,7 @@ then
           files=$(grep '^>' ~/.viminfo | cut -c3- |
                   while read line; do
                     [ -f "${line/\~/$HOME}" ] && echo "$line"
-                  done | fzf --query="$*" --multi --select-1 --exit-0) && vim "${files//\~/$HOME}"
+                  done | fzf --query="$*" --multi --select-1 --exit-0) && smart_vopen "${files//\~/$HOME}"
     }
 
     # fup - cd up to a parent directory
